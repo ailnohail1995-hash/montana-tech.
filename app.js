@@ -100,6 +100,11 @@ function refreshRateUi(){
     $("rateAge").textContent="تحويل الليرة مؤقتاً غير متاح؛ يُعرض الدولار فقط";
   }
   if($("currencySelect"))$("currencySelect").value=unit;
+  const source=$("fxSourceLink");
+  if(source){
+    source.href=rate?.market?.source==="international"?"https://open.er-api.com/v6/latest/USD":"https://lirascope.syria-cloud.sy/ar";
+    source.title=rate?.market?.source==="international"?"مصدر سعر الصرف الدولي المرجعي":"مصدر سعر سوق دمشق";
+  }
   budgetText();renderCatalog();
   if(activePage==="favorites")renderFavorites();
   if(activePage==="compare")renderComparison();
