@@ -11,8 +11,8 @@
 ## What's implemented
 
 1. Separate premium RTL mobile-first administrative UI with 7 areas: overview, phones, brands, catalog/accessory categories, SKUs/stock, guide prices, settings/security.
-2. Manager authentication uses Supabase Auth passwordless email, default magic link, and optional OTP verification code if the email template is configured for codes.
-3. Access rights are **enforced by Supabase Postgres Row Level Security (RLS)**. The UI is not the security boundary. Exactly one email is currently allowlisted in a non-exposed database schema: `tomjontom21@gmail.com`. The admin identity must be a **confirmed Supabase Auth user** for that email. The application does not contain a `service_role` key.
+2. Manager authentication uses Supabase Auth email and password. The admin can request a password recovery email from the login screen or dashboard; the UI accepts either a verified recovery link or a numeric recovery OTP if the hosted Recovery email template includes {{ .Token }}. Passwords are never embedded in GitHub code.
+3. Access rights are **enforced by Supabase Postgres Row Level Security (RLS)**. The UI is not the security boundary. Exactly one email is currently allowlisted in a non-exposed database schema: `ailnohail1995@gmail.com`. The admin identity must be a **confirmed Supabase Auth user** for that email. The application does not contain a `service_role` key.
 4. Data manager reads drafts and published models (30 published + 26 drafts at deployment); creates and edits model information, category, official specs URL, images and image credits, battery, display, processor, cameras, many additional structured specifications, strengths and notes.
 5. New phones are saved as **unpublished drafts**; publishing requires a product image, image credit URL and verified date, and changing publishing state requests confirmation.
 6. Brand management (name, Arabic label, slug, order, logo URL/image, visible/hidden).
@@ -32,7 +32,7 @@
    `https://fonkora-store.montanatech21.workers.dev/admin.html`
    Keep this exact origin/path; extra authorized hosts can be added if needed.
 3. Ensure **Authentication → Providers → Email** is enabled. Supabase's default magic link template sends a link, not a 6-digit OTP; the manual-code form is only for deployments that have switched the email template to `{{ .Token }}`.
-4. Open the Admin link, click **إرسال رابط أو رمز الدخول إلى البريد**, and open the link from `tomjontom21@gmail.com`.
+4. Open the Admin link, click **إرسال رابط أو رمز الدخول إلى البريد**, and open the link from `ailnohail1995@gmail.com`.
 5. The verified manager gets access to all seven sections and can save a first draft phone. No passwords or codes need to be shared with ChatGPT.
 6. If the actual manager will use a different email, do **not** share the above inbox; update the `fonkora_private.admin_allowlist` on the project before that manager signs in. This is a privileged database operation.
 
@@ -66,3 +66,12 @@ Verified from Supabase:
 - Automatic real-world prices and stock verification; uploaded photos must have rights cleared, transparency may need manual background processing.
 - APK rebuild, install and testing with the new admin link.
 - Automated CI/CD repair for Cloudflare production deployment.
+
+
+## New manager account configuration — 2026-11-20
+- The exclusive database allowlist now contains **ailnohail1995@gmail.com**, and the previous address was removed.
+- The login page asks for the manager's **password** and authenticates against Supabase Auth `/token?grant_type=password`. There is no stored or hardcoded plaintext password in source.
+- The password-change action requests Supabase Auth's `/recover` email. A recovery session is required before `/user` accepts a new password; the client checks that the authenticated email is the verified allowlisted address. A numeric OTP can be entered if supplied by the Recovery email template. Default Supabase recovery templates usually send a link instead.
+- Redirect URLs should include `https://fonkora-store.montanatech21.workers.dev/admin.html` (Supabase → Authentication → URL Configuration).
+- For a numeric code in recovery mail, edit Authentication → Email Templates → **Reset Password / Recovery** to include `{{ .Token }}` and keep password reset validation in Supabase. Hosted template availability depends on project plan.
+- App deployment and login-password UX passed static checks. End-to-end authenticated login and reset can be confirmed only once a real Supabase Auth user exists, is email-verified and receives a reset message.
