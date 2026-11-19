@@ -33,4 +33,4 @@ jobs:
       - name: Syntax check
         run: node --check app.js && node --check stage2.js && node --check sw.js
       - name: Static contract tests
-        run: node tests/stage1.mjs && node tests/stage2.mjs
+        run: node tests/stage1.mjs && node tests/stage2.mjs && node tests/currency-prices.mjs
