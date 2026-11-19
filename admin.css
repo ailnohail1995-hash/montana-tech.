@@ -32,3 +32,8 @@ input,select,textarea{color:var(--text);border:1px solid #39586b;background:#0d1
 #signupConfirmForm>label{font-size:11px}
 #signupConfirmForm .btn{margin-top:8px}
 #signupStatus{min-height:12px}
+
+.reauth-form{border:1px solid #366f6b;border-radius:15px;background:#102f34;margin:15px 0;padding:15px;display:grid;gap:10px}
+.reauth-form label{font-size:11px;color:#d3e9e2}
+.reauth-form .form-actions{display:flex;gap:8px;flex-wrap:wrap}
+.reauth-form .form-actions .btn{font-size:11px;padding:9px 12px}
