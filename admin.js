@@ -1,7 +1,7 @@
 "use strict";
 /* FONKORA admin: real Supabase Auth with database-enforced permissions.
  * Publishable key is public. All writes require a verified authorized manager JWT under RLS.
- * Never put service_role or secret keys in this file. */
+ * This file contains only the public browser API key. */
 const SB_URL="https://wxdspknjbbnarqnhptdx.supabase.co", SB_KEY="sb_publishable_Fu5Gsq7q2cfUsb4h0TQC4w_DuZqTtzK";
 const ADMIN_EMAIL="tomjontom21@gmail.com";
 const AUTH=SB_URL+"/auth/v1", REST=SB_URL+"/rest/v1";
@@ -161,10 +161,7 @@ async function loadAll(){
  finally{setBusy(btn,false)}
 }
 async function loadAudit(){
- const token=await freshToken();
- const res=await fetch(REST+"/rpc/fonkora_admin_audit_recent",{method:"POST",headers:{apikey:SB_KEY,Authorization:"Bearer "+token,"content-type":"application/json"},body:JSON.stringify({max_rows:40}),cache:"no-store"});
- const events=await res.json().catch(()=>[]);
- if(!res.ok)throw Error(events.message||"لا يمكن قراءة سجل التغييرات");
+ const events=await api("fonkora_admin_audit_view","GET","select=event_id,actor,target_table,operation,row_key,occurred_at&order=event_id.desc&limit=40");
  const operations={INSERT:"إضافة",UPDATE:"تعديل",DELETE:"حذف"};
  $("auditList").innerHTML=Array.isArray(events)&&events.length
   ?'<div class="audit-wrap">'+events.map(e=>'<div class="audit-line"><b>'+esc(operations[e.operation]||e.operation)+'</b> <span>'+esc(e.target_table)+' · '+esc(e.row_key||"—")+'</span> <small>'+esc(new Date(e.occurred_at).toLocaleString("ar-SY"))+'</small></div>').join("")+'</div>'
