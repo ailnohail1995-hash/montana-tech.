@@ -35,7 +35,7 @@
     <span class="fx-live"><span class="live-dot"></span> سعر الدولار اليوم</span>
     <strong id="rateValue">جاري التحديث...</strong>
     <span id="rateAge" class="fx-age">جلب سعر سوق دمشق وتاريخ تحديثه</span>
-    <a href="https://lirascope.syria-cloud.sy/ar" target="_blank" rel="noreferrer noopener" class="fx-link">المصدر <svg class="icon"><use href="#i-external"></use></svg></a>
+    <a id="fxSourceLink" href="https://lirascope.syria-cloud.sy/ar" target="_blank" rel="noreferrer noopener" class="fx-link">المصدر <svg class="icon"><use href="#i-external"></use></svg></a>
   </div></div>
   <header class="site-header"><div class="wrap header-inner">
     <button class="brand-btn" type="button" data-nav="home" aria-label="الذهاب إلى الرئيسية"><span class="brand-logo">F<span>✦</span></span><span class="brand-type"><b>فونكورا</b><small>متجر التقنية • اختَر بذكاء</small></span></button>
@@ -45,8 +45,8 @@
       <button data-nav="advisor" class="nav-link">مستشارك</button>
       <button data-nav="accessories" class="nav-link">الإكسسوارات</button>
     </nav>
+    <label class="currency-control" for="currencySelect"><span>عملة العرض</span><select id="currencySelect" class="currency-toggle" aria-label="اختر عملة عرض الأسعار"><option value="usd">دولار أمريكي ($)</option><option value="new">ليرة سورية جديدة</option><option value="old">ليرة سورية قديمة</option></select></label>
     <div class="header-tools">
-      <label class="currency-control" for="currencySelect"><span>عملة العرض</span><select id="currencySelect" class="currency-toggle" aria-label="اختر عملة عرض الأسعار"><option value="usd">دولار أمريكي ($)</option><option value="new">ليرة سورية جديدة</option><option value="old">ليرة سورية قديمة</option></select></label>
       <button data-nav="favorites" class="icon-btn" type="button" aria-label="المفضلة"><svg class="icon"><use href="#i-heart"></use></svg></button>
       <button data-nav="cart" class="icon-btn" type="button" aria-label="السلة"><svg class="icon"><use href="#i-bag"></use></svg><i id="cartNumber">0</i></button>
     </div>
