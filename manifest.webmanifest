@@ -1,13 +1,13 @@
 {
-  "name": "مونتانا تك — متجر الهواتف الذكية",
-  "short_name": "مونتانا تك",
-  "description": "تجربة استكشاف الهواتف والمقارنة والترشيح دون عمليات شراء فعلية",
   "id": "/",
+  "name": "مونتانا | عالم الهواتف الذكية",
+  "short_name": "مونتانا",
+  "description": "تصفح الهواتف بمواصفات موثقة، قارنها، وتابع سعر الصرف المرجعي. الطلبات غير مفعلة حالياً.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#090e1a",
-  "theme_color": "#090e1a",
+  "background_color": "#070e1a",
+  "theme_color": "#0b1020",
   "dir": "rtl",
   "lang": "ar",
   "icons": [
