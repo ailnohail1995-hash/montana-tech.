@@ -187,7 +187,7 @@ function extractRedirect(){
  }
  if(q.has("token_hash")&&["recovery","email","signup"].includes(mode)){
   const value=q.get("token_hash");history.replaceState(null,"",location.pathname);
-  return authCall("/verify",{token_hash:value,type:mode==="signup"?"email":mode}).then(data=>{
+  return authCall("/verify",{token_hash:value,type:mode}).then(data=>{
    saveSession(data);
    if(mode==="recovery"){recoveryAuthorized=true;showRecoveryForm();setMessage("recoveryHelp","تم تأكيد رابط الاستعادة. أدخل كلمة المرور الجديدة مرتين.");}
   });
