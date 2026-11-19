@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a1323">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="description" content="لوحة إدارة فونكورا — الدخول للمصرح لهم فقط">
+<link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="./admin.css">
+<title>لوحة إدارة فونكورا | FONKORA</title>
+</head>
+<body>
+<div id="toast" role="status" aria-live="polite" class="toast"></div>
+<section id="login" class="login-screen" aria-label="تسجيل دخول المدير">
+ <div class="login-glow"></div>
+ <div class="login-card">
+  <div class="brand-mark" aria-hidden="true">F<span>✦</span></div>
+  <p class="eyebrow">FONKORA CONTROL CENTER</p>
+  <h1>إدارة المتجر <em>بثقة.</em></h1>
+  <p class="muted">لوحة خاصة لإدارة الهواتف والتصنيفات والصور والأسعار. لا يمكن إجراء أي تعديل دون تسجيل دخول مدير موثّق.</p>
+  <form id="loginForm">
+   <label for="loginEmail">بريد المدير المخوَّل</label>
+   <input id="loginEmail" type="email" autocomplete="username" value="tomjontom21@gmail.com" readonly required>
+   <button id="sendLink" class="btn primary" type="submit">إرسال رابط أو رمز الدخول إلى البريد</button>
+  </form>
+  <form id="verifyForm" class="hidden">
+   <label for="loginToken">رمز الدخول من البريد (عند تفعيل رموز OTP)</label>
+   <input id="loginToken" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="12" placeholder="أدخل الرمز إن وصلك" pattern="[0-9]{6,12}">
+   <button class="btn outline" type="submit">التحقق من رمز الدخول</button>
+  </form>
+  <div id="loginStatus" class="message muted" role="status">تأكد من إعداد عنوان إعادة التوجيه في Supabase Auth إن استخدمت الرابط السحري.</div>
+  <a class="quiet-link" href="./">العودة إلى واجهة الزبائن</a>
+ </div>
+</section>
+
+<div id="dashboard" class="dashboard hidden">
+ <aside class="sidebar">
+  <div class="sidebar-brand"><div class="brand-mark">F<span>✦</span></div><div><strong>فونكورا</strong><small>لوحة الإدارة</small></div></div>
+  <p class="side-section">المتجر</p>
+  <nav aria-label="أقسام الإدارة">
+   <button class="nav-btn active" data-page="overview">⌂ <span>نظرة عامة</span></button>
+   <button class="nav-btn" data-page="phones">▣ <span>الهواتف والمواصفات</span></button>
+   <button class="nav-btn" data-page="brands">◈ <span>الماركات</span></button>
+   <button class="nav-btn" data-page="categories">◇ <span>تصنيفات الإكسسوارات</span></button>
+   <button class="nav-btn" data-page="variants">▧ <span>الإصدارات والمخزون</span></button>
+   <button class="nav-btn" data-page="prices">＄ <span>الأسعار الأولية</span></button>
+   <button class="nav-btn" data-page="settings">⚙ <span>الإعدادات والأمان</span></button>
+  </nav>
+  <div class="sidebar-foot"><p id="identity" class="muted">مدير مخوَّل</p><a href="./" target="_blank" rel="noopener">عرض المتجر ↗</a><button id="logout" class="logout">تسجيل الخروج</button></div>
+ </aside>
+ <div class="main-area">
+  <header class="topbar"><div><p class="eyebrow">FONKORA / ADMIN</p><h1 id="pageTitle">نظرة عامة</h1></div><div class="topbar-actions"><span class="state-chip">● اتصال آمن</span><button class="btn outline small" id="reloadAll">تحديث البيانات</button></div></header>
+  <main class="content">
+   <section class="tab active" id="page-overview">
+    <div class="intro-banner"><p class="eyebrow">لوحة التحكم</p><h2>كل ما يحتاجه متجرك، في مكان واحد.</h2><p>أنشئ مسودات جديدة، راجع صور الأجهزة ومواصفاتها، ثم انشرها عندما تصبح صحيحة. لا تخلط الأسعار التقديرية بمنتجات متاحة للشراء.</p><div class="banner-actions"><button class="btn primary" data-open="phones" data-new="phone">+ إضافة هاتف</button><button class="btn outline" data-open="brands" data-new="brand">+ ماركة جديدة</button></div></div>
+    <div class="stat-grid" id="stats"></div>
+    <div class="grid-two"><div class="panel"><h3>خطوات نشر جهاز جديد</h3><div class="process"><span>١</span><p>حدّد الماركة وأدخل الاسم والمواصفات وروابط المصدر الرسمية.</p></div><div class="process"><span>٢</span><p>ارفع صورة الجهاز بعد تفريغها أو اختر رابطاً مرخّصاً للصورة.</p></div><div class="process"><span>٣</span><p>احفظ مسودة وأضف السعر الأولي أو إصداراً فعلياً، ثم انشر بعد المراجعة.</p></div></div><div class="panel"><h3>حالة البيع</h3><p class="safe-note">الكتالوج للعرض والاختيار حالياً. إضافة سعر أو مخزون هنا لا تفعّل الدفع أو تلقي طلبات العملاء تلقائياً.</p><p id="overviewCounts" class="muted"></p><button class="btn outline" data-open="prices">مراجعة الأسعار</button></div></div>
+   </section>
+
+   <section class="tab" id="page-phones">
+    <div class="section-head"><div><h2>إدارة الهواتف</h2><p>أضف جهازاً بكل تفاصيله، أو عدّل الموجود، أو أوقف نشره.</p></div><button class="btn primary" id="newPhone">+ إضافة هاتف جديد</button></div>
+    <div class="panel list-tools"><input id="phoneSearch" type="search" placeholder="ابحث بالاسم أو الماركة أو المعرّف..." aria-label="البحث في الهواتف"><select id="phoneStateFilter" aria-label="حالة النشر"><option value="all">كل الحالات</option><option value="published">المنشورة</option><option value="draft">المسودات</option></select><span id="phoneTotal" class="muted"></span></div>
+    <div class="records" id="phonesList"></div>
+   </section>
+
+   <section class="tab" id="page-brands">
+    <div class="section-head"><div><h2>الماركات</h2><p>أضف شركة جديدة لتظهر في شريط الماركات بعد نشرها.</p></div><button class="btn primary" id="newBrand">+ ماركة جديدة</button></div>
+    <div id="brandsList" class="records"></div>
+   </section>
+
+   <section class="tab" id="page-categories">
+    <div class="section-head"><div><h2>تصنيفات الإكسسوارات</h2><p>الشواحن والكابلات والسماعات وغيرها، مع قواعد التوافق الأساسية.</p></div><button class="btn primary" id="newCategory">+ إضافة تصنيف</button></div>
+    <div id="categoriesList" class="records"></div>
+   </section>
+
+   <section class="tab" id="page-variants">
+    <div class="section-head"><div><h2>الإصدارات والمخزون</h2><p>إدارة السعة والذاكرة واللون والـSKU والسعر والمخزون الفعلي.</p></div><button class="btn primary" id="newVariant">+ إضافة إصدار</button></div>
+    <div id="variantsList" class="records"></div>
+   </section>
+
+   <section class="tab" id="page-prices">
+    <div class="section-head"><div><h2>الأسعار الأولية</h2><p>عدّل تقديرات الأسعار بالدولار مع بقائها واضحة وغير معتمدة للبيع.</p></div></div>
+    <div class="panel"><input id="priceSearch" type="search" placeholder="ابحث عن جهاز لتعديل سعره..."><div id="pricesList" class="price-list"></div></div>
+   </section>
+
+   <section class="tab" id="page-settings">
+    <div class="section-head"><div><h2>الإعدادات والحماية</h2><p>صلاحيات المدير، وحالة خدمات التطبيق، وآلية نشر المنتجات.</p></div></div>
+    <div class="grid-two">
+      <div class="panel"><h3>حماية البيانات</h3><p>مسموح بالتعديل فقط لحساب المدير الموثَّق. تعمل سياسة RLS في قاعدة البيانات، وليس اعتماداً على إخفاء هذا الرابط.</p><p class="safe-note">صلاحية إضافة المنتجات لا تعني صلاحية إصدار فواتير أو تحصيل مدفوعات؛ هذه المزايا لم تُبنَ بعد.</p></div>
+      <div class="panel"><h3>العملة وسعر الصرف</h3><p>يتلقى المتجر سعر الصرف المرجعي تلقائياً من خدمة Cloudflare المخصصة ويُظهر المصدر وتاريخ التحديث.</p><div id="fxInfo" class="muted">قراءة سعر الصرف...</div><button id="checkFx" class="btn outline">تحقق من السعر الآن</button></div>
+      <div class="panel"><h3>صور المنتجات</h3><p>رفع صورة JPEG أو PNG أو WebP إلى مساحة فونكورا العامة، وتحويلها تلقائياً إلى WebP مضغوط. يُفضّل رفع صورة أصلية شفافة أو مرخّصة.</p><p class="muted">صورة الجهاز تُحفظ داخل تخزين مشروعك، لا في محادثة ChatGPT.</p></div>
+      <div class="panel"><h3>عمليات التدقيق</h3><p>كل إضافة أو تعديل أو إيقاف نشر يُسجل في قاعدة البيانات بتاريخ ومرجع وحساب المنفّذ.</p><p class="muted">الاحتفاظ بسجل التعديلات يساعد في معالجة الأخطاء، لكنه لا يغني عن النسخ الاحتياطي.</p></div>
+    </div>
+   </section>
+  </main>
+ </div>
+</div>
+
+<div id="editorOverlay" class="editor-overlay hidden" role="presentation">
+ <section class="editor-panel" role="dialog" aria-modal="true" aria-labelledby="editorHeading">
+  <header class="editor-head"><div><p class="eyebrow">FONKORA EDITOR</p><h2 id="editorHeading">إضافة جديد</h2></div><button id="closeEditor" type="button" class="icon-close" aria-label="إغلاق">×</button></header>
+  <form id="editorForm" autocomplete="off">
+   <div id="editorFields"></div>
+   <div id="editorStatus" class="muted" role="status"></div>
+   <footer class="editor-foot"><button id="cancelEdit" type="button" class="btn outline">إلغاء</button><button id="saveEdit" type="submit" class="btn primary">حفظ البيانات</button></footer>
+  </form>
+ </section>
+</div>
+<script src="./admin.js" defer></script>
+</body>
+</html>
