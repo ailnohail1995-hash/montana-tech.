@@ -21,15 +21,25 @@
   <p class="muted">لوحة خاصة لإدارة الهواتف والتصنيفات والصور والأسعار. لا يمكن إجراء أي تعديل دون تسجيل دخول مدير موثّق.</p>
   <form id="loginForm">
    <label for="loginEmail">بريد المدير المخوَّل</label>
-   <input id="loginEmail" type="email" autocomplete="username" value="tomjontom21@gmail.com" readonly required>
-   <button id="sendLink" class="btn primary" type="submit">إرسال رابط أو رمز الدخول إلى البريد</button>
+   <input id="loginEmail" type="email" autocomplete="username" value="ailnohail1995@gmail.com" readonly required>
+   <label for="loginPassword">كلمة المرور</label>
+   <div class="password-wrap"><input id="loginPassword" type="password" autocomplete="current-password" placeholder="أدخل كلمة مرور المدير" required minlength="8"><button type="button" id="showLoginPassword" class="password-visibility" aria-label="إظهار كلمة المرور">إظهار</button></div>
+   <button id="loginSubmit" class="btn primary" type="submit">تسجيل دخول المدير <span aria-hidden="true">←</span></button>
   </form>
-  <form id="verifyForm" class="hidden">
-   <label for="loginToken">رمز الدخول من البريد (عند تفعيل رموز OTP)</label>
-   <input id="loginToken" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="12" placeholder="أدخل الرمز إن وصلك" pattern="[0-9]{6,12}">
-   <button class="btn outline" type="submit">التحقق من رمز الدخول</button>
+  <button id="forgotPassword" type="button" class="quiet-reset">نسيت كلمة المرور؟ اطلب رسالة تحقق عبر Gmail</button>
+  <form id="recoveryForm" class="hidden" autocomplete="off">
+   <h2>تأكيد تغيير كلمة المرور</h2>
+   <p class="muted" id="recoveryHelp">سنرسل رسالة استعادة إلى بريد المدير. افتح رابط التحقق، أو أدخل الرمز إذا وصل رمز رقمي.</p>
+   <label for="recoveryCode">رمز التحقق من البريد (اختياري عند استخدام الرابط)</label>
+   <input id="recoveryCode" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="12" placeholder="رمز التحقق إن كان مذكوراً في الرسالة">
+   <label for="newPassword">كلمة المرور الجديدة</label>
+   <input id="newPassword" type="password" autocomplete="new-password" minlength="12" placeholder="١٢ محرفاً على الأقل" required>
+   <label for="confirmNewPassword">تأكيد كلمة المرور</label>
+   <input id="confirmNewPassword" type="password" autocomplete="new-password" minlength="12" placeholder="أعد كتابة كلمة المرور الجديدة" required>
+   <button id="confirmRecovery" class="btn primary" type="submit">تأكيد التحقق وتغيير كلمة المرور</button>
+   <button id="cancelRecovery" type="button" class="btn outline">العودة إلى تسجيل الدخول</button>
   </form>
-  <div id="loginStatus" class="message muted" role="status">تأكد من إعداد عنوان إعادة التوجيه في Supabase Auth إن استخدمت الرابط السحري.</div>
+  <div id="loginStatus" class="message muted" role="status">لا يُسمح بالدخول إلا للبريد المصرّح له، ويُراجع الوصول في قاعدة البيانات.</div>
   <a class="quiet-link" href="./">العودة إلى واجهة الزبائن</a>
  </div>
 </section>
@@ -88,7 +98,7 @@
    <section class="tab" id="page-settings">
     <div class="section-head"><div><h2>الإعدادات والحماية</h2><p>صلاحيات المدير، وحالة خدمات التطبيق، وآلية نشر المنتجات.</p></div></div>
     <div class="grid-two">
-      <div class="panel"><h3>حماية البيانات</h3><p>مسموح بالتعديل فقط لحساب المدير الموثَّق. تعمل سياسة RLS في قاعدة البيانات، وليس اعتماداً على إخفاء هذا الرابط.</p><p class="safe-note">صلاحية إضافة المنتجات لا تعني صلاحية إصدار فواتير أو تحصيل مدفوعات؛ هذه المزايا لم تُبنَ بعد.</p></div>
+      <div class="panel"><h3>حماية البيانات</h3><p>المدير المخوَّل: <strong>ailnohail1995@gmail.com</strong></p><button id="changePassword" type="button" class="btn outline">🔐 تغيير كلمة المرور عبر البريد</button><p id="recoveryStatus" class="muted">يتطلب التغيير التحقق برسالة من Supabase Auth تصل إلى بريد المدير.</p><p>مسموح بالتعديل فقط لحساب المدير الموثَّق. تعمل سياسة RLS في قاعدة البيانات، وليس اعتماداً على إخفاء هذا الرابط.</p><p class="safe-note">صلاحية إضافة المنتجات لا تعني صلاحية إصدار فواتير أو تحصيل مدفوعات؛ هذه المزايا لم تُبنَ بعد.</p></div>
       <div class="panel"><h3>العملة وسعر الصرف</h3><p>يتلقى المتجر سعر الصرف المرجعي تلقائياً من خدمة Cloudflare المخصصة ويُظهر المصدر وتاريخ التحديث.</p><div id="fxInfo" class="muted">قراءة سعر الصرف...</div><button id="checkFx" class="btn outline">تحقق من السعر الآن</button></div>
       <div class="panel"><h3>صور المنتجات</h3><p>رفع صورة JPEG أو PNG أو WebP إلى مساحة فونكورا العامة، وتحويلها تلقائياً إلى WebP مضغوط. يُفضّل رفع صورة أصلية شفافة أو مرخّصة.</p><p class="muted">صورة الجهاز تُحفظ داخل تخزين مشروعك، لا في محادثة ChatGPT.</p></div>
       <div class="panel"><h3>عمليات التدقيق</h3><p>كل إضافة أو تعديل أو إيقاف نشر يُسجل في قاعدة البيانات بتاريخ ومرجع وحساب المنفّذ.</p><p class="muted">الاحتفاظ بسجل التعديلات يساعد في معالجة الأخطاء، لكنه لا يغني عن النسخ الاحتياطي.</p><button id="showAudit" type="button" class="btn outline">عرض آخر التغييرات</button><div id="auditList" class="audit-list muted" aria-live="polite"></div></div>
