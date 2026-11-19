@@ -29,9 +29,10 @@ window.MontanaStage2 = (() => {
   const profile=slug=>profiles.find(p=>p.model_slug===slug);
   const val=(id)=>byId(id)?.value;
   function hasConfirmedPrice(model){return getVariants().some(v=>v.model_slug===model.slug&&v.is_published&&v.is_available&&(Number(v.price_usd)>0||Number(v.price_syp_new_fixed)>0))}
+  function hasPriceGuide(model){return Number(ctx?.getGuideUsd?.(model))>0}
   function confirmedUsd(model){
     const v=getVariants().find(v=>v.model_slug===model.slug&&v.is_published&&v.is_available&&(Number(v.price_usd)>0||Number(v.price_syp_new_fixed)>0));
-    if(!v)return null;
+    if(!v)return hasPriceGuide(model)?Number(ctx.getGuideUsd(model)):null;
     if(Number(v.price_usd)>0)return Number(v.price_usd);
     return currentRate()?Number(v.price_syp_new_fixed)/currentRate():null;
   }
@@ -41,7 +42,7 @@ window.MontanaStage2 = (() => {
       if(selection.screen&&(!Number(p.display_inches)||Number(p.display_inches)<selection.screen))return false;
       if(selection.hz&&(!Number(p.screen_hz)||Number(p.screen_hz)<selection.hz))return false;
       if(selection.chip!=="all"&&!String(p.chipset||"").toLowerCase().includes(selection.chip))return false;
-      if(selection.priced&&!hasConfirmedPrice(p))return false;
+      if(selection.priced&&!hasConfirmedPrice(p)&&!hasPriceGuide(p))return false;
       return true;
     });
     const order=(a,b)=>a.name.localeCompare(b.name,"en");
@@ -127,17 +128,17 @@ window.MontanaStage2 = (() => {
       return {p,good,worth,price,within:price===null?null:budget.available&&price<=budget.usd};
     }).filter(x=>x.good.length>0&&x.within!==false)
       .sort((a,b)=>b.worth-a.worth||b.good.length-a.good.length||(a.price??Infinity)-(b.price??Infinity)||a.p.name.localeCompare(b.p.name,"en")).slice(0,5);
-    let explain=(!budget.available?"تعذر تحويل الميزانية من الليرة لعدم توفر سعر صرف موثوق؛ نعرض الأقرب للمواصفات فقط.":withPrices===0?"أسعار البيع لم تُعتمد؛ النتائج مرتبة وفق المواصفات، وليست ضمن ميزانية مؤكدة.":(withPrices<phones.length?"بعض الهواتف بلا سعر معتمد، فلا يمكن التأكد من مطابقة ميزانيتها.":"الأجهزة ذات الأسعار المعتمدة الأعلى من ميزانيتك مستبعدة."));
+    let explain=(!budget.available?"تعذر تحويل الميزانية من الليرة لعدم توفر سعر صرف مرجعي؛ نعرض الأقرب للمواصفات فقط.":withPrices===0?"لم تُضف أسعار استرشادية بعد، لذا الترتيب حسب المواصفات فقط.":(withPrices<phones.length?"بعض الأجهزة بلا سعر ابتدائي؛ المقارنة المالية غير مكتملة.":"المقارنة هنا بأسعار أولية تقديرية، وليست عروض بيع. قد يختلف السعر النهائي عن ميزانيتك."));
     const html='<div class="stage2-advisor-title"><span class="eyebrow">'+ic("spark")+' اقتراحات مفسَّرة</span><h3>الأقرب لأولوياتك</h3><p>'+e(explain)+'</p></div>';
-    if(!list.length)return html+'<div class="empty-state">لا توجد هواتف مطابقة للأولويات المختارة ضمن الأسعار المعتمدة إن وجدت. جرّب تغيير الاهتمامات.</div>';
+    if(!list.length)return html+'<div class="empty-state">لا توجد هواتف مطابقة للأولويات المختارة ضمن الأسعار الاسترشادية الحالية. جرّب تغيير الميزانية أو الاهتمامات.</div>';
     return html+list.map((x,i)=>{
       const missing=needs.filter(n=>!x.good.includes(n));
       const strengths=x.good.join("، ");
       const why='اخترناه لأنه يلبي '+fmt(x.good.length)+' من '+fmt(needs.length)+' اهتمامات: '+strengths;
       const limitation=missing.length?'لا يحقق أولوية: '+missing.join("، "):"يحقق الأولويات المحددة وفق الخصائص المدرجة";
-      const priceText=x.price===null?"السعر غير محدد — لم تُحتسب الميزانية":'السعر المعتمد: $'+fmt(x.price,2);
+      const priceText=x.price===null?"السعر غير محدد":(hasConfirmedPrice(x.p)?"سعر المتجر: $":"تقدير أولي: $")+fmt(x.price,2);
       return '<article class="stage2-recommend"><div class="recommend-rank">'+fmt(i+1)+'</div><div class="recommend-body"><h4>'+e(x.p.name)+'</h4><p class="recommend-explain">'+e(why)+'</p><p class="recommend-limit">'+e(limitation)+'</p><p class="recommend-price">'+e(priceText)+'</p><div class="recommend-actions"><button type="button" data-detail="'+e(x.p.slug)+'">استكشف الهاتف</button><button type="button" data-compare="'+e(x.p.slug)+'">قارنه</button></div></div></article>';
-    }).join('')+'<p class="fineprint">عدد الاهتمامات المطابقة ليس تقييماً تقنياً للأداء، ولا يثبت الأفضلية المطلقة. راجع اختبارات مستقلة قبل الشراء.</p>';
+    }).join('')+'<p class="fineprint">عدد الاهتمامات المطابقة ليس تقييماً للأداء. الأسعار الأولية غير ملزمة ولا تؤكد التوافر. راجع اختبارات مستقلة قبل الشراء.</p>';
   }
   function renderAdvisor(phones,selectedNeeds){if(byId("advisorResults"))byId("advisorResults").innerHTML=buildAdvisor(phones,selectedNeeds)}
   function alternativeCandidates(phone,phones){
