@@ -1,0 +1,945 @@
+{
+  "generated_at": "2026-11-19",
+  "notes": "Manufacturer-sourced candidate models. Missing specs deliberately null. Prices and stock deliberately absent. Publish after photo verification.",
+  "models": [
+    {
+      "slug": "galaxy-s26-ultra",
+      "brand_slug": "samsung",
+      "name": "Samsung Galaxy S26 Ultra",
+      "tagline_ar": "كاميرا ٢٠٠ ميغابكسل وقلم S Pen وشاشة ٦٫٩ بوصة",
+      "chipset": "Snapdragon 8 Elite Gen 5 for Galaxy",
+      "battery_mah": 5000,
+      "display_inches": 6.9,
+      "screen_hz": 120,
+      "camera_main_mp": 200,
+      "display_tech": "Dynamic AMOLED 2X",
+      "strengths": [
+        "تصوير",
+        "أداء رائد",
+        "قلم S Pen"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://news.samsung.com/us/samsung-unveils-galaxy-s26-series-most-intuitive-galaxy-ai-phone-yet",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "galaxy-s26-plus",
+      "brand_slug": "samsung",
+      "name": "Samsung Galaxy S26+",
+      "tagline_ar": "شاشة واسعة ٦٫٧ بوصة ومعالج رائد",
+      "chipset": "Snapdragon 8 Elite Gen 5 for Galaxy",
+      "battery_mah": 4900,
+      "display_inches": 6.7,
+      "screen_hz": 120,
+      "camera_main_mp": 50,
+      "display_tech": "Dynamic AMOLED 2X",
+      "strengths": [
+        "أداء رائد",
+        "استعمال يومي"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://news.samsung.com/us/samsung-unveils-galaxy-s26-series-most-intuitive-galaxy-ai-phone-yet",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "galaxy-s26",
+      "brand_slug": "samsung",
+      "name": "Samsung Galaxy S26",
+      "tagline_ar": "هاتف رائد بحجم مدمج ٦٫٣ بوصة",
+      "chipset": "Snapdragon 8 Elite Gen 5 for Galaxy",
+      "battery_mah": 4300,
+      "display_inches": 6.3,
+      "screen_hz": 120,
+      "camera_main_mp": 50,
+      "display_tech": "Dynamic AMOLED 2X",
+      "strengths": [
+        "أداء رائد",
+        "استعمال يومي"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://news.samsung.com/us/samsung-unveils-galaxy-s26-series-most-intuitive-galaxy-ai-phone-yet",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "galaxy-a57-5g",
+      "brand_slug": "samsung",
+      "name": "Samsung Galaxy A57 5G",
+      "tagline_ar": "هاتف متوسط بشاشة Super AMOLED Plus وتحديث ١٢٠ هرتز",
+      "chipset": "Exynos 1680",
+      "battery_mah": 5000,
+      "display_inches": 6.7,
+      "screen_hz": 120,
+      "camera_main_mp": 50,
+      "display_tech": "Super AMOLED Plus",
+      "strengths": [
+        "استعمال يومي",
+        "تصوير"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.samsung.com/ie/support/mobile-devices/what-are-the-differences-between-the-galaxy-a57-5g-and-a37-5g/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "galaxy-a37-5g",
+      "brand_slug": "samsung",
+      "name": "Samsung Galaxy A37 5G",
+      "tagline_ar": "شاشة AMOLED وكاميرا رئيسية ٥٠ ميغابكسل",
+      "chipset": "Exynos 1480",
+      "battery_mah": 5000,
+      "display_inches": 6.7,
+      "screen_hz": 120,
+      "camera_main_mp": 50,
+      "display_tech": "Super AMOLED",
+      "strengths": [
+        "استعمال يومي",
+        "تصوير"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.samsung.com/ie/support/mobile-devices/what-are-the-differences-between-the-galaxy-a57-5g-and-a37-5g/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "galaxy-a27-5g",
+      "brand_slug": "samsung",
+      "name": "Samsung Galaxy A27 5G",
+      "tagline_ar": "فئة A بشاشة كبيرة وبطارية ٥٠٠٠ mAh",
+      "chipset": null,
+      "battery_mah": 5000,
+      "display_inches": 6.7,
+      "screen_hz": 120,
+      "camera_main_mp": 50,
+      "display_tech": "Super AMOLED",
+      "strengths": [
+        "استعمال يومي"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.samsung.com/us/support/answer/ANS10010489/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "galaxy-a17-5g",
+      "brand_slug": "samsung",
+      "name": "Samsung Galaxy A17 5G",
+      "tagline_ar": "هاتف يومي بشاشة ٦٫٧ بوصة",
+      "chipset": null,
+      "battery_mah": 5000,
+      "display_inches": 6.7,
+      "screen_hz": 90,
+      "camera_main_mp": 50,
+      "display_tech": "Super AMOLED",
+      "strengths": [
+        "استعمال يومي"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.samsung.com/us/support/answer/ANS10010489/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "galaxy-z-fold7",
+      "brand_slug": "samsung",
+      "name": "Samsung Galaxy Z Fold7",
+      "tagline_ar": "هاتف قابل للطي بشاشة داخلية كبيرة",
+      "chipset": null,
+      "battery_mah": 4400,
+      "display_inches": 8,
+      "screen_hz": 120,
+      "camera_main_mp": 200,
+      "display_tech": "Dynamic AMOLED 2X",
+      "strengths": [
+        "أداء رائد",
+        "شاشة قابلة للطي"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.samsung.com/us/support/answer/ANS10006876/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "galaxy-z-flip7",
+      "brand_slug": "samsung",
+      "name": "Samsung Galaxy Z Flip7",
+      "tagline_ar": "قابل للطي مع شاشة خارجية FlexWindow",
+      "chipset": null,
+      "battery_mah": 4300,
+      "display_inches": 6.9,
+      "screen_hz": 120,
+      "camera_main_mp": 50,
+      "display_tech": "Dynamic AMOLED 2X",
+      "strengths": [
+        "شاشة قابلة للطي",
+        "استعمال يومي"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://news.samsung.com/global/samsung-galaxy-z-flip7-a-pocket-sized-ai-powerhouse-with-a-new-edge-to-edge-flexwindow",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "iphone-18-pro",
+      "brand_slug": "apple",
+      "name": "Apple iPhone 18 Pro",
+      "tagline_ar": "آيفون احترافي من سلسلة ٢٠٢٦",
+      "chipset": null,
+      "battery_mah": null,
+      "display_inches": null,
+      "screen_hz": null,
+      "camera_main_mp": null,
+      "display_tech": null,
+      "strengths": [
+        "تصوير",
+        "أداء رائد",
+        "فيديو"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.apple.com/iphone-18-pro/specs/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "iphone-18-pro-max",
+      "brand_slug": "apple",
+      "name": "Apple iPhone 18 Pro Max",
+      "tagline_ar": "الشاشة الأكبر ضمن سلسلة Pro لعام ٢٠٢٦",
+      "chipset": null,
+      "battery_mah": null,
+      "display_inches": null,
+      "screen_hz": null,
+      "camera_main_mp": null,
+      "display_tech": null,
+      "strengths": [
+        "تصوير",
+        "أداء رائد",
+        "فيديو"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.apple.com/iphone-18-pro/specs/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "iphone-17-pro",
+      "brand_slug": "apple",
+      "name": "Apple iPhone 17 Pro",
+      "tagline_ar": "كاميرات Fusion الاحترافية ومعالج A19 Pro",
+      "chipset": "Apple A19 Pro",
+      "battery_mah": null,
+      "display_inches": 6.3,
+      "screen_hz": 120,
+      "camera_main_mp": 48,
+      "display_tech": "Super Retina XDR",
+      "strengths": [
+        "تصوير",
+        "أداء رائد",
+        "فيديو"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://support.apple.com/en-us/125090",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "iphone-17-pro-max",
+      "brand_slug": "apple",
+      "name": "Apple iPhone 17 Pro Max",
+      "tagline_ar": "الشاشة الكبيرة والكاميرات الاحترافية",
+      "chipset": "Apple A19 Pro",
+      "battery_mah": null,
+      "display_inches": 6.9,
+      "screen_hz": 120,
+      "camera_main_mp": 48,
+      "display_tech": "Super Retina XDR",
+      "strengths": [
+        "تصوير",
+        "أداء رائد",
+        "فيديو"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.apple.com/newsroom/2025/09/apple-unveils-iphone-17-pro-and-iphone-17-pro-max/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "iphone-17",
+      "brand_slug": "apple",
+      "name": "Apple iPhone 17",
+      "tagline_ar": "آيفون بشاشة ProMotion ومواصفات الجيل ١٧",
+      "chipset": "Apple A19",
+      "battery_mah": null,
+      "display_inches": 6.3,
+      "screen_hz": 120,
+      "camera_main_mp": 48,
+      "display_tech": "Super Retina XDR",
+      "strengths": [
+        "تصوير",
+        "استعمال يومي"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.apple.com/iphone-17/specs/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "iphone-17e",
+      "brand_slug": "apple",
+      "name": "Apple iPhone 17e",
+      "tagline_ar": "معالج A19 في فئة اقتصادية نسبياً من آبل",
+      "chipset": "Apple A19",
+      "battery_mah": null,
+      "display_inches": 6.1,
+      "screen_hz": null,
+      "camera_main_mp": 48,
+      "display_tech": "Super Retina XDR",
+      "strengths": [
+        "استعمال يومي"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.apple.com/iphone-17e/specs/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "iphone-air",
+      "brand_slug": "apple",
+      "name": "Apple iPhone Air",
+      "tagline_ar": "تصميم نحيف وخفيف وشاشة ProMotion",
+      "chipset": "Apple A19 Pro",
+      "battery_mah": null,
+      "display_inches": 6.5,
+      "screen_hz": 120,
+      "camera_main_mp": 48,
+      "display_tech": "Super Retina XDR",
+      "strengths": [
+        "استعمال يومي",
+        "أداء رائد"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.apple.com/iphone-air/specs/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "xiaomi-17-ultra",
+      "brand_slug": "xiaomi",
+      "name": "Xiaomi 17 Ultra",
+      "tagline_ar": "تصوير Leica وعدسة تقريب ٢٠٠ ميغابكسل",
+      "chipset": "Snapdragon 8 Elite Gen 5",
+      "battery_mah": null,
+      "display_inches": 6.9,
+      "screen_hz": 120,
+      "camera_main_mp": 50,
+      "display_tech": "HyperRGB OLED",
+      "strengths": [
+        "تصوير",
+        "أداء رائد"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.mi.com/global/product/xiaomi-17-ultra/specs/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "xiaomi-15t-pro",
+      "brand_slug": "xiaomi",
+      "name": "Xiaomi 15T Pro",
+      "tagline_ar": "تصوير Leica وعدسة تقريب ١١٥ مم",
+      "chipset": null,
+      "battery_mah": null,
+      "display_inches": null,
+      "screen_hz": null,
+      "camera_main_mp": 50,
+      "display_tech": null,
+      "strengths": [
+        "تصوير",
+        "أداء رائد"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.mi.com/global/product/xiaomi-15t-pro/specs/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "redmi-note-17-pro-max-5g",
+      "brand_slug": "xiaomi",
+      "name": "REDMI Note 17 Pro Max 5G",
+      "tagline_ar": "جيل Redmi Note الأحدث بمزايا تحمّل محسّنة",
+      "chipset": null,
+      "battery_mah": null,
+      "display_inches": null,
+      "screen_hz": null,
+      "camera_main_mp": null,
+      "display_tech": null,
+      "strengths": [
+        "بطارية",
+        "استعمال يومي"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.mi.com/global/product/redmi-note-17-pro-max-5g/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "redmi-note-15-pro-plus-5g",
+      "brand_slug": "xiaomi",
+      "name": "REDMI Note 15 Pro+ 5G",
+      "tagline_ar": "شاشة ٦٫٨٣ بوصة AMOLED وتحديث ١٢٠ هرتز",
+      "chipset": null,
+      "battery_mah": null,
+      "display_inches": 6.83,
+      "screen_hz": 120,
+      "camera_main_mp": null,
+      "display_tech": "CrystalRes AMOLED",
+      "strengths": [
+        "تصوير",
+        "استعمال يومي"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.mi.com/global/product/redmi-note-15-pro-plus-5g/specs/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "redmi-note-15-pro-5g",
+      "brand_slug": "xiaomi",
+      "name": "REDMI Note 15 Pro 5G",
+      "tagline_ar": "فئة متوسطة بشاشة AMOLED",
+      "chipset": null,
+      "battery_mah": null,
+      "display_inches": null,
+      "screen_hz": null,
+      "camera_main_mp": null,
+      "display_tech": null,
+      "strengths": [
+        "تصوير",
+        "استعمال يومي"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.mi.com/global/product/redmi-note-15-pro-5g/specs/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "redmi-note-14-pro-5g",
+      "brand_slug": "xiaomi",
+      "name": "REDMI Note 14 Pro 5G",
+      "tagline_ar": "تصوير ٢٠٠ ميغابكسل وشاشة AMOLED",
+      "chipset": null,
+      "battery_mah": null,
+      "display_inches": 6.67,
+      "screen_hz": 120,
+      "camera_main_mp": 200,
+      "display_tech": "AMOLED",
+      "strengths": [
+        "تصوير",
+        "استعمال يومي"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.mi.com/ph/product/redmi-note-14-pro-5g/specs/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "poco-f7-ultra",
+      "brand_slug": "poco",
+      "name": "POCO F7 Ultra",
+      "tagline_ar": "معالج Snapdragon 8 Elite وشاشة عالية الدقة",
+      "chipset": "Snapdragon 8 Elite",
+      "battery_mah": null,
+      "display_inches": 6.67,
+      "screen_hz": 120,
+      "camera_main_mp": 50,
+      "display_tech": "WQHD+ AMOLED",
+      "strengths": [
+        "ألعاب",
+        "أداء رائد"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.mi.com/global/product/poco-f7-ultra/specs/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "poco-f7-pro",
+      "brand_slug": "poco",
+      "name": "POCO F7 Pro",
+      "tagline_ar": "معالج Snapdragon 8 Gen 3 وبطارية ٦٠٠٠ mAh",
+      "chipset": "Snapdragon 8 Gen 3",
+      "battery_mah": 6000,
+      "display_inches": 6.67,
+      "screen_hz": 120,
+      "camera_main_mp": 50,
+      "display_tech": "WQHD+ AMOLED",
+      "strengths": [
+        "ألعاب",
+        "بطارية"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.mi.com/global/product/poco-f7-pro/specs/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "honor-magic8-pro",
+      "brand_slug": "honor",
+      "name": "HONOR Magic8 Pro",
+      "tagline_ar": "هاتف رائد من سلسلة HONOR Magic",
+      "chipset": null,
+      "battery_mah": null,
+      "display_inches": null,
+      "screen_hz": null,
+      "camera_main_mp": null,
+      "display_tech": null,
+      "strengths": [
+        "تصوير",
+        "أداء رائد"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.honor.com/global/phones/honor-magic8-pro/spec/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "honor-magic7-pro",
+      "brand_slug": "honor",
+      "name": "HONOR Magic7 Pro",
+      "tagline_ar": "رائد مع عدسات تصوير متطورة",
+      "chipset": null,
+      "battery_mah": null,
+      "display_inches": null,
+      "screen_hz": null,
+      "camera_main_mp": null,
+      "display_tech": null,
+      "strengths": [
+        "تصوير",
+        "أداء رائد"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.honor.com/global/phones/honor-magic7-pro/spec/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "honor-400",
+      "brand_slug": "honor",
+      "name": "HONOR 400",
+      "tagline_ar": "كاميرا رئيسية ٢٠٠ ميغابكسل",
+      "chipset": null,
+      "battery_mah": null,
+      "display_inches": null,
+      "screen_hz": null,
+      "camera_main_mp": 200,
+      "display_tech": null,
+      "strengths": [
+        "تصوير",
+        "استعمال يومي"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.honor.com/global/phones/honor-400/spec/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "honor-x9c",
+      "brand_slug": "honor",
+      "name": "HONOR X9c",
+      "tagline_ar": "تصميم متين وبطارية كبيرة",
+      "chipset": null,
+      "battery_mah": null,
+      "display_inches": null,
+      "screen_hz": null,
+      "camera_main_mp": null,
+      "display_tech": null,
+      "strengths": [
+        "بطارية",
+        "استعمال يومي"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.honor.com/global/phones/honor-x9c/spec/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "oppo-reno14-pro",
+      "brand_slug": "oppo",
+      "name": "OPPO Reno14 Pro 5G",
+      "tagline_ar": "تصوير بورتريه وخيارات تصوير متعددة",
+      "chipset": null,
+      "battery_mah": null,
+      "display_inches": null,
+      "screen_hz": null,
+      "camera_main_mp": null,
+      "display_tech": null,
+      "strengths": [
+        "تصوير",
+        "استعمال يومي"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.oppo.com/en/smartphones/series-reno/reno14-pro/specs/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "oppo-reno13-pro",
+      "brand_slug": "oppo",
+      "name": "OPPO Reno13 Pro 5G",
+      "tagline_ar": "تصميم وتصوير فئة Reno Pro",
+      "chipset": null,
+      "battery_mah": null,
+      "display_inches": null,
+      "screen_hz": null,
+      "camera_main_mp": null,
+      "display_tech": null,
+      "strengths": [
+        "تصوير",
+        "استعمال يومي"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.oppo.com/en/smartphones/series-reno/reno13-pro/specs/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "vivo-v60",
+      "brand_slug": "vivo",
+      "name": "vivo V60",
+      "tagline_ar": "كاميرا ZEISS وبطارية ٦٥٠٠ mAh",
+      "chipset": null,
+      "battery_mah": 6500,
+      "display_inches": null,
+      "screen_hz": null,
+      "camera_main_mp": 50,
+      "display_tech": null,
+      "strengths": [
+        "تصوير",
+        "بطارية"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.vivo.com/en/products/param/v60",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "vivo-v50",
+      "brand_slug": "vivo",
+      "name": "vivo V50",
+      "tagline_ar": "كاميرا ZEISS وبطارية ٦٠٠٠ mAh",
+      "chipset": null,
+      "battery_mah": 6000,
+      "display_inches": null,
+      "screen_hz": null,
+      "camera_main_mp": 50,
+      "display_tech": null,
+      "strengths": [
+        "تصوير",
+        "بطارية"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.vivo.com/en/products/param/v50",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "realme-gt7",
+      "brand_slug": "realme",
+      "name": "realme GT 7",
+      "tagline_ar": "معالج Dimensity 9400e وبطارية ٧٠٠٠ mAh",
+      "chipset": "Dimensity 9400e",
+      "battery_mah": 7000,
+      "display_inches": 6.78,
+      "screen_hz": 120,
+      "camera_main_mp": 50,
+      "display_tech": "AMOLED",
+      "strengths": [
+        "ألعاب",
+        "بطارية",
+        "أداء رائد"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.realme.com/global/realme-gt-7-5g/specs",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "realme-14-pro-plus",
+      "brand_slug": "realme",
+      "name": "realme 14 Pro+ 5G",
+      "tagline_ar": "شاشة OLED ١٢٠ هرتز وكاميرات متنوعة",
+      "chipset": null,
+      "battery_mah": null,
+      "display_inches": 6.83,
+      "screen_hz": 120,
+      "camera_main_mp": 50,
+      "display_tech": "OLED",
+      "strengths": [
+        "تصوير",
+        "استعمال يومي"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.realme.com/global/realme-14-pro-plus-5g/specs",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "tecno-camon40-pro-5g",
+      "brand_slug": "tecno",
+      "name": "TECNO CAMON 40 Pro 5G",
+      "tagline_ar": "كاميرا ٥٠ ميغابكسل وشاشة ١٤٤ هرتز",
+      "chipset": "Dimensity 7300 Ultimate",
+      "battery_mah": 5200,
+      "display_inches": 6.78,
+      "screen_hz": 144,
+      "camera_main_mp": 50,
+      "display_tech": "AMOLED",
+      "strengths": [
+        "تصوير",
+        "استعمال يومي"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://www.tecno-mobile.com/phones/tech-specs/techspecs/camon-40-pro-5g/",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    },
+    {
+      "slug": "google-pixel10-pro",
+      "brand_slug": "google",
+      "name": "Google Pixel 10 Pro",
+      "tagline_ar": "نظام Pixel من Google ومعالج Tensor G5",
+      "chipset": "Google Tensor G5",
+      "battery_mah": null,
+      "display_inches": null,
+      "screen_hz": null,
+      "camera_main_mp": 50,
+      "display_tech": null,
+      "strengths": [
+        "تصوير",
+        "استعمال يومي"
+      ],
+      "specifications": {
+        "source_type": "official_manufacturer",
+        "region_variants_may_differ": true,
+        "photo_status": "awaiting_verified_image"
+      },
+      "specs_source_url": "https://store.google.com/product/pixel_10_pro_specs?hl=en-US",
+      "image_url": null,
+      "image_credit_url": null,
+      "verified_on": "2026-11-19",
+      "is_published": false
+    }
+  ]
+}
