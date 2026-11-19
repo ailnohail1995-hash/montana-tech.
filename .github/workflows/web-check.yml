@@ -5,6 +5,7 @@ on:
     paths:
       - 'index.html'
       - 'app.js'
+      - 'stage2.js'
       - 'styles.css'
       - 'sw.js'
       - 'manifest.webmanifest'
@@ -29,6 +30,6 @@ jobs:
         with:
           node-version: '22'
       - name: Syntax check
-        run: node --check app.js && node --check sw.js
+        run: node --check app.js && node --check stage2.js && node --check sw.js
       - name: Static contract tests
-        run: node tests/stage1.mjs
+        run: node tests/stage1.mjs && node tests/stage2.mjs
