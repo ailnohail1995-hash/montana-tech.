@@ -23,3 +23,12 @@ input,select,textarea{color:var(--text);border:1px solid #39586b;background:#0d1
 #recoveryForm .btn{margin-top:5px}
 #changePassword{margin:5px 0 9px}
 #recoveryStatus{font-size:11px}
+
+/* Account activation with browser-only password entry and email verification. */
+.first-activation{border-top:1px solid #335767;margin-top:14px;padding-top:18px}
+.first-activation>.btn{width:100%;border-color:#54847d;background:#193a42;color:#d5fff0}
+.first-activation>p{font-size:11px;color:#a3c9d0;margin:10px 0}
+#signupConfirmForm{margin-top:14px;padding:11px;background:#152c3d;border:1px solid #416278;border-radius:14px}
+#signupConfirmForm>label{font-size:11px}
+#signupConfirmForm .btn{margin-top:8px}
+#signupStatus{min-height:12px}
