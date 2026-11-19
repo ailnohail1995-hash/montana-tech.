@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <meta name="theme-color" content="#090e1a"/>
+  <meta name="description" content="مونتانا تك — اكتشف هاتفك القادم، قارنه واختر الأنسب لك."/>
+  <link rel="manifest" href="./manifest.webmanifest"/>
+  <link rel="icon" href="./assets/icon.svg" type="image/svg+xml"/>
+  <link rel="stylesheet" href="./styles.css"/>
+  <title>مونتانا تك — اكتشف هاتفك القادم</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <button type="button" class="brand-lockup" data-tab="home" aria-label="الرئيسية">
+        <span class="brand-symbol">M<span>✧</span></span>
+        <span class="brand-lines"><strong>مونتانا <em>تك</em></strong><small>هاتفك القادم يبدأ هنا</small></span>
+      </button>
+      <div class="top-actions">
+        <button class="round-btn" id="favoritesButton" type="button" aria-label="المفضلة"><span>♡</span></button>
+        <button class="round-btn basket-trigger" data-tab="cart" type="button" aria-label="السلة"><span>▤</span><b class="cart-count" id="headerCartCount">٠</b></button>
+      </div>
+    </header>
+    <main id="main">
+      <section id="home" class="tab-panel active" aria-labelledby="hero-heading">
+        <div class="announcement"><span class="live-dot"></span> تجربة أولية للمتجر — المنتجات والأسعار تجريبية وليست للبيع الآن <span class="sparkle">✧</span></div>
+        <section class="hero">
+          <div class="orb orb-1"></div><div class="orb orb-2"></div>
+          <div class="hero-content">
+            <span class="eyebrow"><span class="line"></span> عالم أوسع من الاختيارات</span>
+            <h1 id="hero-heading">لا تختَر هاتفًا.<br/><span>اكتشف هاتفك.</span></h1>
+            <p>قارن، استكشف، ودع ميزانيتك واحتياجاتك تقودك إلى الاختيار المناسب.</p>
+            <button id="heroAdvisor" class="main-cta" type="button">اكتشف الأنسب لي <span>↖</span></button>
+            <span class="hero-meta">بدون تسجيل دخول · بدون ذكاء اصطناعي مدفوع</span>
+          </div>
+          <div class="hero-device" aria-hidden="true"><div class="hero-phone back"><div class="cam-cluster"><span></span><span></span><span></span></div></div><div class="hero-phone front"><div class="island"></div><div class="screen-glow"></div></div></div>
+        </section>
+        <div class="section-title"><div><span class="kicker">ابدأ من هنا</span><h2>اكتشف حسب الماركة</h2></div><span class="section-hint">اسحب للمزيد ←</span></div>
+        <div class="brand-strip" id="brandStrip" aria-label="ماركات الهواتف"></div>
+        <div class="search-wrap"><span class="search-icon">⌕</span><input id="searchInput" type="search" placeholder="ابحث عن هاتف أو ماركة..." aria-label="البحث عن هاتف"/><kbd>بحث سريع</kbd></div>
+        <div class="section-title products-head"><div><span class="kicker">كل اختيار له قصة</span><h2>هواتف تستحق الاستكشاف</h2></div><span class="item-count" id="itemCount">—</span></div>
+        <div class="chips" id="categoryChips" aria-label="تصفية الهواتف"></div>
+        <div class="product-grid" id="productGrid"></div>
+        <div id="emptyResults" class="empty hidden">لم نجد هواتف تطابق هذا البحث. جرّب اسماً أو ماركة أخرى.</div>
+      </section>
+      <section id="compare" class="tab-panel" aria-labelledby="compare-heading"><div class="page-intro"><span class="kicker">قرار أوضح، بثقة أكثر</span><h1 id="compare-heading">مختبر المقارنة <span>⚖</span></h1><p>لا نكتفي بوضع المواصفات جنباً إلى جنب؛ نوضح نقاط القوة وأفضل استخدام لكل هاتف.</p></div><div class="compare-pickers"><label>الهاتف الأول<select id="compareA"></select></label><span class="versus">VS</span><label>الهاتف الثاني<select id="compareB"></select></label></div><div id="compareOutput"></div></section>
+      <section id="advisor" class="tab-panel" aria-labelledby="advisor-heading"><div class="page-intro"><span class="kicker">دليلك في عالم الهواتف</span><h1 id="advisor-heading">مستشار هاتفك <span>✦</span></h1><p>ثلاث خطوات فقط؛ نرتب الهواتف بحسب ميزانيتك وما يهمك، بمعايير معلنة وقابلة للتعديل من الإدارة.</p></div><div class="advisor-card"><label for="budget">ميزانيتك القصوى (ليرة سورية — تجريبية)</label><div class="budget-value"><strong id="budgetValue">٣٬٠٠٠٬٠٠٠</strong><span>ل.س</span></div><input id="budget" type="range" min="500000" max="10000000" step="250000" value="3000000"/><div class="range-captions"><span>٥٠٠ ألف</span><span>١٠ ملايين</span></div><h3>ما الأهم بالنسبة لك؟ <small>اختر حتى ٣</small></h3><div id="needsGrid" class="needs-grid"></div><button class="main-cta full" id="findMatch">اعرض اختياراتي <span>↖</span></button></div><div id="advisorResults" class="advisor-results"></div></section>
+      <section id="accessories" class="tab-panel" aria-labelledby="accessories-heading"><div class="page-intro"><span class="kicker">أكمل تجربتك</span><h1 id="accessories-heading">الإكسسوارات <span>⌁</span></h1><p>شواحن، سماعات، كابلات، حافظات وغيرها. سنربط التوافق تلقائياً بموديل الهاتف عند إضافة بيانات المتجر الحقيقية.</p></div><div class="accessory-grid" id="accessoryGrid"></div></section>
+      <section id="cart" class="tab-panel" aria-labelledby="cart-heading"><div class="page-intro"><span class="kicker">وصلنا تقريباً</span><h1 id="cart-heading">سلّتك <span>▤</span></h1><p>راجع الكميات قبل الطلب. هذا الإصدار للتجربة ولا يرسل بيانات أو طلبات فعلية.</p></div><div id="cartContents"></div></section>
+      <section id="admin" class="tab-panel" aria-labelledby="admin-heading"><div class="page-intro"><span class="kicker">لإدارة المتجر</span><h1 id="admin-heading">لوحة الإدارة <span>◈</span></h1><p>معاينة للتصميم فقط؛ لن نفعّل صلاحيات المدير والطلبات قبل ربط مصادقة آمنة بقاعدة بيانات مستقلة.</p></div><div class="stats-grid"><div class="stat"><span>المنتجات التجريبية</span><strong id="adminProductCount">—</strong></div><div class="stat"><span>طلبات حقيقية</span><strong>٠</strong></div><div class="stat"><span>عملاء مسجلون</span><strong>٠</strong></div><div class="stat"><span>قيمة المبيعات</span><strong>٠</strong></div></div><div class="admin-preview"><h3>أقسام لوحة المدير القادمة</h3><div>📱 المنتجات والماركات والإصدارات</div><div>📦 الطلبات ومراحل التجهيز والتوصيل</div><div>🎁 النقاط والهدايا والأكواد</div><div>🔔 الإشعارات والعروض</div><div>📊 المبيعات والمخزون والتقارير</div></div></section>
+    </main>
+    <button class="floating-advisor" id="floatingAdvisor" type="button" aria-label="افتح مستشار الهاتف"><span>✧</span><b>ساعدني أختار</b></button>
+    <nav class="bottom-nav" aria-label="التنقل الرئيسي"><button class="active" type="button" data-tab="home"><span>⌂</span><small>اكتشف</small></button><button type="button" data-tab="compare"><span>⇄</span><small>قارن</small></button><button type="button" data-tab="advisor"><span>✦</span><small>مستشارك</small></button><button type="button" data-tab="accessories"><span>◈</span><small>إكسسوارات</small></button><button type="button" data-tab="cart"><span>▤</span><small>السلة</small></button></nav>
+  </div>
+  <div id="detailOverlay" class="overlay hidden" role="presentation"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="detailTitle"><div class="sheet-handle"></div><button type="button" class="sheet-close" id="closeDetail" aria-label="إغلاق التفاصيل">×</button><div id="detailBody"></div></div></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js" defer></script>
+</body>
+</html>
