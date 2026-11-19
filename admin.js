@@ -3,7 +3,7 @@
  * Publishable key is public. All writes require a verified authorized manager JWT under RLS.
  * This file contains only the public browser API key. */
 const SB_URL="https://wxdspknjbbnarqnhptdx.supabase.co", SB_KEY="sb_publishable_Fu5Gsq7q2cfUsb4h0TQC4w_DuZqTtzK";
-const ADMIN_EMAIL="tomjontom21@gmail.com";
+const ADMIN_EMAIL="ailnohail1995@gmail.com";
 const AUTH=SB_URL+"/auth/v1", REST=SB_URL+"/rest/v1";
 const PHOTO_BUCKET="fonkora-products";
 const SESSION_KEY="fonkora.admin.session";
@@ -22,7 +22,7 @@ const ADDITIONAL_SPECS=[
  ["dimensions","الأبعاد"],["materials","مواد التصميم"],["warranty","الضمان (إن كان معتمداً)"],
  ["features","ميزات أخرى"]
 ];
-let session=null,isAdmin=false,page="overview",editorType=null,editing=null,photoFile=null,photoPreview=null,toastHandle=null;
+let session=null,isAdmin=false,recoveryAuthorized=false,page="overview",editorType=null,editing=null,photoFile=null,photoPreview=null,toastHandle=null;
 let db={phones:[],brands:[],catalogCategories:[],categories:[],variants:[],prices:[],profiles:[],settings:[]};
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -72,51 +72,106 @@ async function checkPermission(){
  setMessage("identity",email);
  await loadAll();
 }
-async function loginWithEmail(event){
- event.preventDefault();const btn=$("sendLink");setBusy(btn,true);
- try{
-  await authCall("/otp?redirect_to="+encodeURIComponent(location.origin+"/admin.html"),{email:ADMIN_EMAIL,create_user:true});
-  $("verifyForm").classList.remove("hidden");
-  setMessage("loginStatus","أُرسل طلب الدخول. افتح بريد "+ADMIN_EMAIL+" واتبع الرابط (أو أدخل رمز OTP إن كانت الرسالة تحتوي رمزاً). لا ترسل الرمز لأحد.");
-  notify("تحقق من البريد المخوّل للدخول");
- }catch(e){fail(e)}
- finally{setBusy(btn,false)}
+function showRecoveryForm(){
+ revealAuth();$("recoveryForm").classList.remove("hidden");$("loginForm").classList.add("hidden");$("forgotPassword").classList.add("hidden");
 }
-async function loginWithToken(event){
- event.preventDefault();const btn=$("verifyForm").querySelector("button");
- const token=$("loginToken").value.trim();
- if(!/^[0-9]{6,12}$/.test(token)){notify("أدخل رمزاً رقمياً صالحاً من البريد",true);return}
- setBusy(btn,true);
+function hideRecoveryForm(){
+ recoveryAuthorized=false;$("recoveryForm").classList.add("hidden");$("loginForm").classList.remove("hidden");$("forgotPassword").classList.remove("hidden");
+ $("recoveryCode").value="";$("newPassword").value="";$("confirmNewPassword").value="";
+}
+async function loginWithPassword(event){
+ event.preventDefault();const btn=$("loginSubmit");setBusy(btn,true);
  try{
-  const result=await authCall("/verify",{email:ADMIN_EMAIL,token,type:"email"});
+  const password=$("loginPassword").value;
+  if(password.length<8)throw Error("كلمة المرور غير صحيحة");
+  const result=await authCall("/token?grant_type=password",{email:ADMIN_EMAIL,password});
+  $("loginPassword").value="";
   saveSession(result);
-  $("loginToken").value="";
   await checkPermission();
- }catch(e){clearSession();fail(e)}
+  notify("تم تسجيل دخول المدير بنجاح");
+ }catch(err){
+  $("loginPassword").value="";clearSession();
+  setMessage("loginStatus","تأكد من كلمة المرور ومن تأكيد بريد الحساب؛ إذا لم يُفعّل الحساب فاستخدم رسالة التأكيد أولاً.");
+  fail(err);
+ }finally{setBusy(btn,false)}
+}
+async function requestRecovery(event){
+ event?.preventDefault?.();
+ const trigger=event?.currentTarget;
+ setBusy(trigger,true);
+ try{
+  await authCall("/recover?redirect_to="+encodeURIComponent(location.origin+"/admin.html"),{email:ADMIN_EMAIL});
+  showRecoveryForm();
+  setMessage("recoveryHelp","أُرسل طلب استعادة إلى بريد المدير. إذا وجدت رابطاً فافتحه، وإذا وجدت رمزاً فأدخله هنا. عند استخدام الرابط سيُسمح بإدخال كلمة مرور جديدة.");
+  setMessage("loginStatus","تحقق من بريد "+ADMIN_EMAIL+"، بما فيه الرسائل غير المرغوب فيها.");
+  setMessage("recoveryStatus","أُرسل طلب تغيير كلمة المرور. تحقق من بريد المدير.");
+  notify("تحقق من Gmail لإكمال تغيير كلمة المرور");
+ }catch(err){fail(err)}
+ finally{setBusy(trigger,false)}
+}
+async function getVerifiedAdminIdentity(token){
+ const res=await fetch(AUTH+"/user",{method:"GET",headers:{apikey:SB_KEY,Authorization:"Bearer "+token},cache:"no-store"});
+ const data=await res.json().catch(()=>({}));
+ if(!res.ok||String(data.email||"").toLowerCase()!==ADMIN_EMAIL.toLowerCase()||!data.email_confirmed_at)throw Error("حساب الاستعادة لا يطابق البريد المخوّل والمؤكد للمدير");
+ return data;
+}
+async function completeRecovery(event){
+ event.preventDefault();
+ const pass=$("newPassword").value,confirmPass=$("confirmNewPassword").value,code=$("recoveryCode").value.trim();
+ const btn=$("confirmRecovery");setBusy(btn,true);
+ try{
+  if(pass.length<12||pass!==confirmPass)throw Error("أدخل كلمة مرور جديدة من ١٢ محرفاً على الأقل، وتأكد من تطابقها مع التأكيد");
+  if(code){
+   if(!/^[0-9]{6,12}$/.test(code))throw Error("رمز تحقق البريد غير صالح");
+   const auth=await authCall("/verify",{email:ADMIN_EMAIL,token:code,type:"recovery"});
+   saveSession(auth);recoveryAuthorized=true;
+  }
+  if(!recoveryAuthorized)throw Error("يجب تأكيد البريد أولاً عبر رمز الاستعادة أو رابط التحقق المرسل من Supabase");
+  const token=await freshToken();
+  await getVerifiedAdminIdentity(token);
+  await authCall("/user",{password:pass},"PUT",{Authorization:"Bearer "+token});
+  $("newPassword").value="";$("confirmNewPassword").value="";$("recoveryCode").value="";
+  await signOut();
+  hideRecoveryForm();
+  setMessage("loginStatus","تغيّرت كلمة المرور بنجاح. ادخل بكلمة المرور الجديدة.");
+  notify("تم تغيير كلمة المرور بنجاح");
+ }catch(err){fail(err)}
  finally{setBusy(btn,false)}
 }
+
 async function signOut(){
  try{if(session?.access_token)await authCall("/logout",{}, "POST",{Authorization:"Bearer "+session.access_token})}catch{}
  clearSession();notify("تم تسجيل الخروج");
 }
 function extractRedirect(){
- const hash=new URLSearchParams(location.hash.slice(1));
- const q=new URLSearchParams(location.search);
+ const hash=new URLSearchParams(location.hash.slice(1)),q=new URLSearchParams(location.search);
+ const mode=hash.get("type")||q.get("type")||"";
+ if(hash.has("error")||q.has("error")){
+  setMessage("loginStatus","فشل رابط البريد أو انتهت صلاحيته. اطلب رسالة جديدة.");
+  history.replaceState(null,"",location.pathname);return;
+ }
  if(hash.has("access_token")&&hash.has("refresh_token")){
   const data={access_token:hash.get("access_token"),refresh_token:hash.get("refresh_token"),expires_in:Number(hash.get("expires_in"))||3600};
   history.replaceState(null,"",location.pathname);
   saveSession(data);
+  if(mode==="recovery"){recoveryAuthorized=true;showRecoveryForm();setMessage("recoveryHelp","تم التحقق من رابط البريد. أدخل كلمة المرور الجديدة مرتين واترك رمز التحقق فارغاً.");}
   return;
  }
- if(q.has("token_hash")&&q.get("type")==="email"){
+ if(q.has("token_hash")&&["recovery","email","signup"].includes(mode)){
   const value=q.get("token_hash");history.replaceState(null,"",location.pathname);
-  return authCall("/verify",{token_hash:value,type:"email"}).then(saveSession);
+  return authCall("/verify",{token_hash:value,type:mode==="signup"?"email":mode}).then(data=>{
+   saveSession(data);
+   if(mode==="recovery"){recoveryAuthorized=true;showRecoveryForm();setMessage("recoveryHelp","تم تأكيد رابط الاستعادة. أدخل كلمة المرور الجديدة مرتين.");}
+  });
  }
- if(hash.has("error")||q.has("error")){setMessage("loginStatus","فشل رابط الدخول أو انتهت صلاحيته؛ اطلب رابطاً جديداً.");history.replaceState(null,"",location.pathname)}
 }
 async function boot(){
- $("loginForm").addEventListener("submit",loginWithEmail);
- $("verifyForm").addEventListener("submit",loginWithToken);
+ $("loginForm").addEventListener("submit",loginWithPassword);
+ $("showLoginPassword").addEventListener("click",()=>{const input=$("loginPassword");const visible=input.type==="password";input.type=visible?"text":"password";$("showLoginPassword").textContent=visible?"إخفاء":"إظهار";});
+ $("forgotPassword").addEventListener("click",requestRecovery);
+ $("changePassword").addEventListener("click",requestRecovery);
+ $("recoveryForm").addEventListener("submit",completeRecovery);
+ $("cancelRecovery").addEventListener("click",()=>{hideRecoveryForm();setMessage("loginStatus","يمكنك تسجيل الدخول بكلمة المرور الحالية أو طلب رسالة استعادة جديدة.");});
  $("logout").addEventListener("click",signOut);
  $("reloadAll").addEventListener("click",()=>loadAll().catch(fail));
  $("newPhone").addEventListener("click",()=>openEditor("phone"));
@@ -145,7 +200,7 @@ async function boot(){
  try{
   const maybe=extractRedirect();if(maybe&&typeof maybe.then==="function")await maybe;
   if(!session){try{const s=sessionStorage.getItem(SESSION_KEY);if(s)session=JSON.parse(s)}catch{}}
-  if(session){await checkPermission()}else{revealAuth()}
+  if(recoveryAuthorized){showRecoveryForm()}else if(session){await checkPermission()}else{revealAuth()}
  }catch(e){clearSession();setMessage("loginStatus",e?.message||"لا يمكن التحقق من حساب المدير");}
 }
 async function loadAll(){
