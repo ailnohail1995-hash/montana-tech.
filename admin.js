@@ -95,6 +95,34 @@ async function loginWithPassword(event){
   fail(err);
  }finally{setBusy(btn,false)}
 }
+async function activateFirstManager(){
+ const btn=$("signupAdmin"),password=$("loginPassword").value;
+ if(password.length<12){notify("أدخل كلمة مرور لا تقل عن ١٢ محرفاً قبل تفعيل المدير",true);return}
+ setBusy(btn,true);
+ try{
+  const result=await authCall("/signup?redirect_to="+encodeURIComponent(location.origin+"/admin.html"),{email:ADMIN_EMAIL,password});
+  $("loginPassword").value="";
+  if(result?.access_token&&result?.refresh_token){
+   saveSession(result);await checkPermission();notify("تم تفعيل حساب المدير وتسجيل الدخول");return;
+  }
+  $("signupConfirmForm").classList.remove("hidden");
+  setMessage("signupStatus","استُلم طلب التفعيل. راجع بريد "+ADMIN_EMAIL+" لرسالة تأكيد الحساب. افتح رابط الرسالة، أو أدخل الرمز إن كان موجوداً. لا تشارك الرمز مع أحد.");
+  notify("راجع بريد Gmail لتأكيد الحساب");
+ }catch(err){
+  $("loginPassword").value="";setMessage("signupStatus",err?.message||"تعذر إرسال طلب تفعيل الحساب");fail(err);
+ }finally{setBusy(btn,false)}
+}
+async function verifySignupCode(event){
+ event.preventDefault();const code=$("signupConfirmationCode").value.trim();
+ if(!/^[0-9]{6,12}$/.test(code)){notify("أدخل رمز التفعيل الرقمي من رسالة البريد",true);return}
+ const btn=$("verifySignup");setBusy(btn,true);
+ try{
+  const data=await authCall("/verify",{email:ADMIN_EMAIL,token:code,type:"signup"});
+  saveSession(data);$("signupConfirmationCode").value="";
+  await checkPermission();notify("تم تأكيد حساب المدير");
+ }catch(err){fail(err)}
+ finally{setBusy(btn,false)}
+}
 async function requestRecovery(event){
  event?.preventDefault?.();
  const trigger=event?.currentTarget;
@@ -167,6 +195,8 @@ function extractRedirect(){
 }
 async function boot(){
  $("loginForm").addEventListener("submit",loginWithPassword);
+ $("signupAdmin").addEventListener("click",activateFirstManager);
+ $("signupConfirmForm").addEventListener("submit",verifySignupCode);
  $("showLoginPassword").addEventListener("click",()=>{const input=$("loginPassword");const visible=input.type==="password";input.type=visible?"text":"password";$("showLoginPassword").textContent=visible?"إخفاء":"إظهار";});
  $("forgotPassword").addEventListener("click",requestRecovery);
  $("changePassword").addEventListener("click",requestRecovery);
