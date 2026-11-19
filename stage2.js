@@ -219,7 +219,7 @@ window.MontanaStage2 = (() => {
     byId("resetFilters")?.addEventListener("click",clearFilters);
     byId("compareFocus")?.addEventListener("change",evt=>{activeFocus=evt.target.value;ctx.renderComparison()});
     byId("compareDifferences")?.addEventListener("change",evt=>{onlyDifferences=evt.target.checked;applyDiff()});
-    byId("shareComparison")?.addEventListener("click",()=>share(compareLink(),"مقارنة هواتف مونتانا"));
+    byId("shareComparison")?.addEventListener("click",()=>share(compareLink(),"مقارنة هواتف فونكورا"));
     byId("accessoryPhonePick")?.addEventListener("change",evt=>{phoneChoice=evt.target.value;renderFamilies()});
     byId("budgetManual")?.addEventListener("input",()=>{
       const b=budgetUsd();byId("budgetManualHint").textContent=b.available?"ميزانية محددة؛ سيتم التحقق منها فقط عند وجود سعر بيع معتمد.":"لا يمكن استخدام مبلغ سوري دون سعر صرف مرجعي متاح.";
@@ -231,7 +231,7 @@ window.MontanaStage2 = (() => {
       const b=evt.target.closest("button");if(!b)return;
       if(b.dataset.detailTab){const key=b.dataset.detailTab;document.querySelectorAll(".detail-tabbar [data-detail-tab]").forEach(x=>{const yes=x.dataset.detailTab===key;x.classList.toggle("active",yes);x.setAttribute("aria-selected",String(yes))});document.querySelectorAll(".detail-stage2-panel").forEach(x=>x.classList.toggle("hidden",x.dataset.detailContent!==key))}
       else if(b.dataset.openAccessories){phoneChoice=b.dataset.openAccessories;ctx.closeDetail();ctx.go("accessories");refreshPhones()}
-      else if(b.dataset.sharePhone){const u=new URL(location.href);u.searchParams.delete("compare");u.searchParams.delete("focus");u.searchParams.set("phone",b.dataset.sharePhone);share(u.toString(),"هاتف على مونتانا")}
+      else if(b.dataset.sharePhone){const u=new URL(location.href);u.searchParams.delete("compare");u.searchParams.delete("focus");u.searchParams.set("phone",b.dataset.sharePhone);share(u.toString(),"هاتف على فونكورا")}
     });
     updateFilterCount();refreshPhones();fetchCompatibility();
   }
