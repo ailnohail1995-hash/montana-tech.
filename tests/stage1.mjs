@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+const html=readFileSync('index.html','utf8'),app=readFileSync('app.js','utf8'),sw=readFileSync('sw.js','utf8'),manifest=JSON.parse(readFileSync('manifest.webmanifest','utf8'));
+const ids=new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]));
+for(const [,name] of app.matchAll(/\$\("([^"]+)"\)/g))assert(ids.has(name),'Missing DOM #'+name);
+for(const id of ['rateValue','rateAge','brandRail','productGrid','compareFirst','compareSecond','advisorResults','detailDialog'])assert(ids.has(id),id);
+assert(app.includes('PUBLISHABLE_KEY'),'Public catalog API key not found');
+assert(!/service_role|sb_secret_/.test(app),'Service key indicator found in app');
+assert(app.includes('supabase.co/rest/v1'),'Catalog not read from Supabase');
+assert(!sw.includes('api/rates"') || sw.includes('url.pathname.startsWith("/api/")'),'Rate endpoint should not be cached');
+assert(manifest.dir==='rtl');
+console.log('Stage 1 static contract test passed');
