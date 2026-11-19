@@ -15,6 +15,10 @@ assert(html.includes('ailnohail1995@gmail.com'),"Admin identity displayed incorr
 assert(!html.includes('tomjontom21@gmail.com'),"Old admin may not remain in UI");
 for(const id of ['loginPassword','forgotPassword','recoveryForm','recoveryCode','newPassword','confirmNewPassword','changePassword'])assert(ids.has(id),'Admin password or recovery field missing: '+id);
 assert(js.includes('grant_type=password'),'Password login endpoint required');
+for(const field of ['signupAdmin','signupConfirmForm','signupConfirmationCode','verifySignup'])assert(ids.has(field),'First login setup missing '+field);
+assert(js.includes('activateFirstManager'), 'Owner browser activation missing');
+assert(js.includes('/signup?redirect_to='), 'Signup must use native Supabase Auth with email verification');
+assert(!js.includes('AILNOHail1995'), 'Initial manager password must never be bundled');
 assert(js.includes('/recover?redirect_to='),'Gmail recovery must use Supabase Auth recovery email');
 assert(js.includes('type:"recovery"'),'Password reset must verify recovery token');
 assert(js.includes('getVerifiedAdminIdentity'),'Password update must verify admin email from Auth');
