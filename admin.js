@@ -123,6 +123,40 @@ async function verifySignupCode(event){
  }catch(err){fail(err)}
  finally{setBusy(btn,false)}
 }
+async function sendReauthenticationCode(event){
+ event?.preventDefault?.();
+ const btn=$("changePassword");setBusy(btn,true);
+ try{
+  const token=await freshToken();
+  await getVerifiedAdminIdentity(token);
+  const r=await fetch(AUTH+"/reauthenticate",{method:"GET",headers:{apikey:SB_KEY,Authorization:"Bearer "+token},cache:"no-store"});
+  const details=await r.json().catch(()=>({}));
+  if(!r.ok)throw Error(details?.message||details?.msg||details?.error||"تعذّر إرسال رمز التحقق");
+  $("reauthPasswordForm").classList.remove("hidden");
+  setMessage("recoveryStatus","أُرسل طلب رمز إعادة التحقق إلى "+ADMIN_EMAIL+". أدخل الرمز الوارد في الرسالة لتأكيد التغيير.");
+  notify("راجع Gmail للحصول على رمز تغيير كلمة المرور");
+ }catch(err){fail(err)}
+ finally{setBusy(btn,false)}
+}
+async function updatePasswordWithNonce(event){
+ event.preventDefault();
+ const nonce=$("reauthNonce").value.trim(),
+  password=$("reauthNewPassword").value,
+  confirmation=$("reauthPasswordRepeat").value;
+ const btn=$("saveVerifiedPassword");setBusy(btn,true);
+ try{
+  if(!/^[0-9]{6,12}$/.test(nonce))throw Error("أدخل رمز التحقق الرقمي من Gmail");
+  if(password.length<12||password!==confirmation)throw Error("كلمة المرور الجديدة يجب ألا تقل عن ١٢ محرفاً وأن تتطابق مع التأكيد");
+  const token=await freshToken();await getVerifiedAdminIdentity(token);
+  const result=await authCall("/user",{password,nonce},"PUT",{Authorization:"Bearer "+token});
+  $("reauthNonce").value="";$("reauthNewPassword").value="";$("reauthPasswordRepeat").value="";
+  $("reauthPasswordForm").classList.add("hidden");
+  await signOut();
+  setMessage("loginStatus","تم تغيير كلمة المرور بعد التحقق من Gmail. سجّل الدخول بالكلمة الجديدة.");
+  notify("تغيّرت كلمة المرور بنجاح. سجّل الدخول مجدداً.");
+ }catch(err){fail(err)}
+ finally{setBusy(btn,false)}
+}
 async function requestRecovery(event){
  event?.preventDefault?.();
  const trigger=event?.currentTarget;
@@ -199,7 +233,9 @@ async function boot(){
  $("signupConfirmForm").addEventListener("submit",verifySignupCode);
  $("showLoginPassword").addEventListener("click",()=>{const input=$("loginPassword");const visible=input.type==="password";input.type=visible?"text":"password";$("showLoginPassword").textContent=visible?"إخفاء":"إظهار";});
  $("forgotPassword").addEventListener("click",requestRecovery);
- $("changePassword").addEventListener("click",requestRecovery);
+ $("changePassword").addEventListener("click",sendReauthenticationCode);
+ $("reauthPasswordForm").addEventListener("submit",updatePasswordWithNonce);
+ $("cancelVerifiedPassword").addEventListener("click",()=>{$("reauthPasswordForm").classList.add("hidden");$("reauthNonce").value="";$("reauthNewPassword").value="";$("reauthPasswordRepeat").value="";});
  $("recoveryForm").addEventListener("submit",completeRecovery);
  $("cancelRecovery").addEventListener("click",()=>{hideRecoveryForm();setMessage("loginStatus","يمكنك تسجيل الدخول بكلمة المرور الحالية أو طلب رسالة استعادة جديدة.");});
  $("logout").addEventListener("click",signOut);
