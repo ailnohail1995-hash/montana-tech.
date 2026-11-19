@@ -7,9 +7,6 @@ on:
       - 'admin.html'
       - 'admin.js'
       - 'admin.css'
-      - 'admin.html'
-      - 'admin.js'
-      - 'admin.css'
       - 'app.js'
       - 'stage2.js'
       - 'styles.css'
@@ -20,6 +17,9 @@ on:
   pull_request:
     paths:
       - 'index.html'
+      - 'admin.html'
+      - 'admin.js'
+      - 'admin.css'
       - 'app.js'
       - 'stage2.js'
       - 'styles.css'
