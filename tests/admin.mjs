@@ -11,7 +11,14 @@ for(const section of ["phones","brands","categories","variants","prices","settin
  assert(html.includes('data-page="'+section+'"'),"Missing manager navigation "+section);
 }
 assert(html.includes('class="dashboard hidden"'),"Manager data must be hidden before authorization");
-assert(html.includes('tomjontom21@gmail.com'),"Admin identity displayed incorrectly");
+assert(html.includes('ailnohail1995@gmail.com'),"Admin identity displayed incorrectly");
+assert(!html.includes('tomjontom21@gmail.com'),"Old admin may not remain in UI");
+for(const id of ['loginPassword','forgotPassword','recoveryForm','recoveryCode','newPassword','confirmNewPassword','changePassword'])assert(ids.has(id),'Admin password or recovery field missing: '+id);
+assert(js.includes('grant_type=password'),'Password login endpoint required');
+assert(js.includes('/recover?redirect_to='),'Gmail recovery must use Supabase Auth recovery email');
+assert(js.includes('type:"recovery"'),'Password reset must verify recovery token');
+assert(js.includes('getVerifiedAdminIdentity'),'Password update must verify admin email from Auth');
+assert(!js.includes('AILNOHail1995'),'User password must not appear in app bundle');
 assert(js.includes('/auth/v1'),"Missing Supabase Auth endpoints");
 assert(js.includes('store_currency_settings'),"Server-side permission check required");
 assert(js.includes('phone_price_guides'),"Manager must edit indicative prices");
