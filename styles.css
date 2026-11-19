@@ -110,3 +110,47 @@
 .comp-name img{max-width:88%;max-height:165px}
 .detail-image{background:radial-gradient(circle at 50% 45%,rgba(112,175,202,.21),transparent 72%)!important}
 .img-credit{background:rgba(20,41,58,.62);color:#b5d8d6;font-size:9px}
+
+/* FONKORA pricing and header: explicit three-currency control and honest estimates. */
+.currency-control{display:flex;align-items:center;gap:8px;color:#bce4e2;font-size:11px;font-weight:700;white-space:nowrap}
+.currency-control>span{color:#a8c9d2}
+.currency-control .currency-toggle{min-width:151px;width:auto;max-width:210px;appearance:auto;outline-offset:2px;cursor:pointer;color:#e7fff9;background:#193745;border:1px solid #527e82;padding:10px 8px}
+.currency-control .currency-toggle:focus-visible{outline:2px solid #a1ffe5}
+.fx-inner{flex-wrap:wrap;min-height:44px;gap:7px 13px;padding-top:5px;padding-bottom:5px}
+#rateValue{white-space:normal;line-height:1.5;font-size:12px;direction:ltr;unicode-bidi:isolate}
+#rateAge{display:inline!important;font-size:10px;line-height:1.4}
+.fx-live{white-space:nowrap}
+.price-label{font-size:10px;font-weight:800;color:#a1efda;display:block;letter-spacing:0}
+.price-main{display:block;font-family:Manrope,"IBM Plex Sans Arabic",sans-serif;color:#f5dfaa;font-size:17px!important;line-height:1.5;direction:ltr;text-align:right;white-space:normal;overflow-wrap:anywhere}
+.price-conversion{font-family:Manrope,"IBM Plex Sans Arabic",sans-serif;display:block;color:#d0e6f2!important;font-size:10px!important;line-height:1.8}
+.price-warning{display:block;font-size:9px!important;color:#ffdb9c!important;margin-top:3px}
+.product-price{align-items:flex-start;min-height:77px}
+.product-price>div{min-width:0;flex:1}
+.product-price>.icon{margin-top:20px;color:#8ae5cb}
+.data-disclaimer strong{color:#efdcab}
+@media(max-width:850px){
+ .currency-control>span{display:none}
+ .currency-control .currency-toggle{min-width:138px}
+}
+@media(max-width:750px){
+ .header-inner{display:grid!important;grid-template-columns:1fr auto;gap:7px!important;padding-top:7px;padding-bottom:8px}
+ .brand-btn{grid-column:1;grid-row:1;min-width:0}
+ .header-tools{grid-column:2;grid-row:1;display:flex;gap:5px}
+ .currency-control{grid-column:1/-1;grid-row:2;width:100%;justify-content:flex-start}
+ .currency-control>span{display:inline}
+ .currency-control .currency-toggle{width:100%;max-width:none;flex:1;min-height:38px}
+ .fx-inner{justify-content:flex-start}
+ .fx-live{font-size:10px}
+ #rateValue{font-size:11px}
+ #rateAge{width:100%;order:4}
+ .fx-link{margin-inline-start:auto}
+ .product-price{min-height:92px}
+ .price-main{font-size:14px!important}
+ .price-warning{font-size:8px!important}
+}
+@media(max-width:420px){
+ .brand-type b{font-size:18px}
+ .brand-type small{font-size:8px}
+ .price-main{font-size:13px!important}
+ .price-conversion{font-size:9px!important}
+}
