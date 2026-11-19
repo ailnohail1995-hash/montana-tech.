@@ -75,3 +75,25 @@ Verified from Supabase:
 - Redirect URLs should include `https://fonkora-store.montanatech21.workers.dev/admin.html` (Supabase → Authentication → URL Configuration).
 - For a numeric code in recovery mail, edit Authentication → Email Templates → **Reset Password / Recovery** to include `{{ .Token }}` and keep password reset validation in Supabase. Hosted template availability depends on project plan.
 - App deployment and login-password UX passed static checks. End-to-end authenticated login and reset can be confirmed only once a real Supabase Auth user exists, is email-verified and receives a reset message.
+
+
+## First manager activation and Gmail-code password change (20 November 2026)
+
+Database allowlist is restricted to `ailnohail1995@gmail.com`. Former allowlisted administrator is revoked.
+
+**Important:** At the time of the latest SQL check, the Supabase Auth project has zero users. The owner-supplied initial password was **not transmitted through the assistant tools**; a safety check prevented it. It is not written to source, logs produced by the app, README, or the database. The owner must type their password directly into the trusted browser on the site to initialize the account.
+
+1. Visit [Manager](https://fonkora-store.montanatech21.workers.dev/admin).
+2. The login email is read-only `ailnohail1995@gmail.com`. Enter a strong password into the password input.
+3. Click **تفعيل حساب المدير لأول مرة** (not the regular sign-in button). This calls Supabase Auth's native `/signup` from the user's browser over HTTPS.
+4. Confirm the email from Gmail via the Supabase email link, or an emailed numeric code if the signup confirmation template supports `{{ .Token }}`.
+5. Sign in with email and password; Supabase Auth JWT + server-side RLS verify that the email is confirmed and matches the exact database allowlist.
+
+**Authenticated password change in manager dashboard:** Click "إرسال رمز تغيير كلمة المرور إلى Gmail" in Settings. The application calls `GET /auth/v1/reauthenticate` under the signed-in JWT, requesting an email nonce. It then requires that numeric nonce plus a new password and confirmation, and submits `PUT /auth/v1/user` with `{password,nonce}`. After a success it signs the user out. Forgotten password has a separate email Recovery link / optional numeric code.
+
+**One-time Supabase configuration recommended/required for strong enforcement:**
+- Authentication → URL Configuration → authorize `https://fonkora-store.montanatech21.workers.dev/admin.html` for signup/recovery redirects.
+- Authentication → Providers → Email → enable **Secure password change**. Without the Supabase Auth server setting, even though the UI requires the nonce, the server might accept a direct password update from an existing Auth session without reauthentication.
+- Ensure confirmation and reauthentication emails can be delivered to the permitted Gmail address; free-tier SMTP restrictions may need attention.
+
+Latest checks: mobile browser 390px displayed the new email, password input, first-time signup button, recovery UI, nonce-form UI, and no plaintext initial password. Database still had 0 Auth users and authorization denied without a verified identity. Supabase security linter returned no findings. Do not claim that signup or email delivery succeeded until owner completes the activation and we verify the Auth user exists.
