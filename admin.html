@@ -108,7 +108,17 @@
    <section class="tab" id="page-settings">
     <div class="section-head"><div><h2>الإعدادات والحماية</h2><p>صلاحيات المدير، وحالة خدمات التطبيق، وآلية نشر المنتجات.</p></div></div>
     <div class="grid-two">
-      <div class="panel"><h3>حماية البيانات</h3><p>المدير المخوَّل: <strong>ailnohail1995@gmail.com</strong></p><button id="changePassword" type="button" class="btn outline">🔐 تغيير كلمة المرور عبر البريد</button><p id="recoveryStatus" class="muted">يتطلب التغيير التحقق برسالة من Supabase Auth تصل إلى بريد المدير.</p><p>مسموح بالتعديل فقط لحساب المدير الموثَّق. تعمل سياسة RLS في قاعدة البيانات، وليس اعتماداً على إخفاء هذا الرابط.</p><p class="safe-note">صلاحية إضافة المنتجات لا تعني صلاحية إصدار فواتير أو تحصيل مدفوعات؛ هذه المزايا لم تُبنَ بعد.</p></div>
+      <div class="panel"><h3>حماية البيانات</h3><p>المدير المخوَّل: <strong>ailnohail1995@gmail.com</strong></p><button id="changePassword" type="button" class="btn outline">🔐 إرسال رمز تغيير كلمة المرور إلى Gmail</button>
+<p id="recoveryStatus" class="muted">يُرسل رمز تحقق إلى البريد المسجّل للمدير، ثم يُستخدم لتغيير كلمة المرور.</p>
+<form id="reauthPasswordForm" class="reauth-form hidden">
+  <label for="reauthNonce">رمز التحقق الذي وصلك عبر Gmail</label>
+  <input id="reauthNonce" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="12" placeholder="رمز إعادة التحقق" required>
+  <label for="reauthNewPassword">كلمة المرور الجديدة</label>
+  <input id="reauthNewPassword" type="password" autocomplete="new-password" minlength="12" placeholder="١٢ محرفاً على الأقل" required>
+  <label for="reauthPasswordRepeat">تأكيد كلمة المرور</label>
+  <input id="reauthPasswordRepeat" type="password" autocomplete="new-password" minlength="12" required>
+  <div class="form-actions"><button id="saveVerifiedPassword" type="submit" class="btn primary">تأكيد الرمز وتغيير كلمة المرور</button><button id="cancelVerifiedPassword" type="button" class="btn outline">إلغاء</button></div>
+</form><p>مسموح بالتعديل فقط لحساب المدير الموثَّق. تعمل سياسة RLS في قاعدة البيانات، وليس اعتماداً على إخفاء هذا الرابط.</p><p class="safe-note">صلاحية إضافة المنتجات لا تعني صلاحية إصدار فواتير أو تحصيل مدفوعات؛ هذه المزايا لم تُبنَ بعد.</p></div>
       <div class="panel"><h3>العملة وسعر الصرف</h3><p>يتلقى المتجر سعر الصرف المرجعي تلقائياً من خدمة Cloudflare المخصصة ويُظهر المصدر وتاريخ التحديث.</p><div id="fxInfo" class="muted">قراءة سعر الصرف...</div><button id="checkFx" class="btn outline">تحقق من السعر الآن</button></div>
       <div class="panel"><h3>صور المنتجات</h3><p>رفع صورة JPEG أو PNG أو WebP إلى مساحة فونكورا العامة، وتحويلها تلقائياً إلى WebP مضغوط. يُفضّل رفع صورة أصلية شفافة أو مرخّصة.</p><p class="muted">صورة الجهاز تُحفظ داخل تخزين مشروعك، لا في محادثة ChatGPT.</p></div>
       <div class="panel"><h3>عمليات التدقيق</h3><p>كل إضافة أو تعديل أو إيقاف نشر يُسجل في قاعدة البيانات بتاريخ ومرجع وحساب المنفّذ.</p><p class="muted">الاحتفاظ بسجل التعديلات يساعد في معالجة الأخطاء، لكنه لا يغني عن النسخ الاحتياطي.</p><button id="showAudit" type="button" class="btn outline">عرض آخر التغييرات</button><div id="auditList" class="audit-list muted" aria-live="polite"></div></div>
