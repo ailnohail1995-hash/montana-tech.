@@ -132,6 +132,7 @@ async function boot(){
  $("editorOverlay").addEventListener("click",e=>{if(e.target===$("editorOverlay"))closeEditor()});
  $("editorForm").addEventListener("submit",saveEditor);
  $("checkFx").addEventListener("click",loadFX);
+ $("showAudit").addEventListener("click",()=>loadAudit().catch(fail));
  document.addEventListener("keydown",e=>{if(e.key==="Escape")closeEditor()});
  document.addEventListener("click",e=>{
   const target=e.target.closest("button");
@@ -151,23 +152,23 @@ async function loadAll(){
  const btn=$("reloadAll");setBusy(btn,true);
  try{
   const names=["brands","phone_models","catalog_categories","accessory_families","phone_variants","phone_price_guides","phone_accessory_profiles","store_currency_settings"];
-  const data=await Promise.all(names.map(name=>api(name,"GET","select=*&limit=500&order="+(name==="phone_variants"?"id":"name")+".asc").catch(e=>{
-   if(name==="catalog_categories"||name==="phone_accessory_profiles")return [];
-   throw e;
-  })));
+  const data=await Promise.all(names.map(name=>api(name,"GET","select=*&limit=500")));
   [db.brands,db.phones,db.catalogCategories,db.categories,db.variants,db.prices,db.profiles,db.settings]=data;
-  // Name sort is unavailable in several tables; fallback fetched below if necessary.
-  renderAll();loadFX();
-  notify("البيانات محدّثة من السحابة");
- }catch(err){
-  // Exact order query above may be unsupported for some tables; retry without sorting.
-  try{
-   const tables=["brands","phone_models","catalog_categories","accessory_families","phone_variants","phone_price_guides","phone_accessory_profiles","store_currency_settings"];
-   const data=await Promise.all(tables.map(t=>api(t,"GET","select=*&limit=500")));
-   [db.brands,db.phones,db.catalogCategories,db.categories,db.variants,db.prices,db.profiles,db.settings]=data;renderAll();loadFX();
-   notify("تم تحديث الكتالوج");
-  }catch(e){fail(e)}
- }finally{setBusy(btn,false)}
+  renderAll();
+  loadFX();
+  notify("تم تحديث بيانات المتجر من السحابة");
+ }catch(err){fail(err)}
+ finally{setBusy(btn,false)}
+}
+async function loadAudit(){
+ const token=await freshToken();
+ const res=await fetch(REST+"/rpc/fonkora_admin_audit_recent",{method:"POST",headers:{apikey:SB_KEY,Authorization:"Bearer "+token,"content-type":"application/json"},body:JSON.stringify({max_rows:40}),cache:"no-store"});
+ const events=await res.json().catch(()=>[]);
+ if(!res.ok)throw Error(events.message||"لا يمكن قراءة سجل التغييرات");
+ const operations={INSERT:"إضافة",UPDATE:"تعديل",DELETE:"حذف"};
+ $("auditList").innerHTML=Array.isArray(events)&&events.length
+  ?'<div class="audit-wrap">'+events.map(e=>'<div class="audit-line"><b>'+esc(operations[e.operation]||e.operation)+'</b> <span>'+esc(e.target_table)+' · '+esc(e.row_key||"—")+'</span> <small>'+esc(new Date(e.occurred_at).toLocaleString("ar-SY"))+'</small></div>').join("")+'</div>'
+  :'<p>لم تُسجل تغييرات بعد.</p>';
 }
 function changePage(id){
  if(!PAGE_TITLES[id])return;
