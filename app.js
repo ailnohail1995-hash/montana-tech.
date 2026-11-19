@@ -7,7 +7,7 @@ const BRAND_LABEL={samsung:"سامسونج",xiaomi:"شاومي",poco:"بوكو",
 const BRANDS_SORT=["samsung","xiaomi","poco","honor","apple"];
 const USES=[{id:"تصوير",name:"التصوير والكاميرا",icon:"camera"},{id:"ألعاب",name:"الألعاب والأداء",icon:"cpu"},{id:"بطارية",name:"البطارية الطويلة",icon:"battery"},{id:"أداء رائد",name:"سرعة الاستجابة",icon:"spark"},{id:"فيديو",name:"تصوير الفيديو",icon:"camera"},{id:"استعمال يومي",name:"التصفح والتواصل",icon:"phone"}];
 const ACCESSORIES=[["الشواحن","شحن آمن بحسب قدرة هاتفك","battery"],["السماعات اللاسلكية","Bluetooth وتوافق الأجهزة","phone"],["الغطاء والحماية","مقاسات متوافقة مع الموديل","shield"],["الكابلات","USB-C وملحقات التوصيل","filter"],["بنوك الطاقة","سعة وشحن مناسب","battery"],["الساعات الذكية","الملحقات المتصلة بهاتفك","clock"]];
-let phones=FALLBACK.slice(),variants=[],brand="all",focus="all",query="",rate=null,unit="new",priceGuides=new Map(),favorites=[],selectedNeeds=["تصوير","بطارية"],activePage="home",modalReturnFocus=null;
+let phones=FALLBACK.slice(),variants=[],brand="all",category="all",focus="all",query="",rate=null,unit="new",priceGuides=new Map(),brandNames=new Map(),catalogCategories=[],favorites=[],selectedNeeds=["تصوير","بطارية"],activePage="home",modalReturnFocus=null;
 const $=id=>document.getElementById(id);
 const esc=x=>String(x??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 const fmt=(n,d=0)=>new Intl.NumberFormat("ar-SY",{maximumFractionDigits:d}).format(Number(n));
@@ -41,11 +41,19 @@ function priceMarkup(p){
   return '<span class="price-label">'+esc(x.source)+'</span><strong class="price-main">'+esc(primary)+'</strong><small class="price-conversion">'+esc(secondary)+'</small><small class="price-warning">'+esc(note)+'</small>';
 }
 function photo(p,hero=false){const src=safeUrl(p.image_url);return src?'<img src="'+esc(src)+'" alt="صورة حقيقية مرجعية لهاتف '+esc(p.name)+'" loading="'+(hero?"eager":"lazy")+'" decoding="async" referrerpolicy="no-referrer">':'<div class="image-fallback">'+icon("phone")+'</div>'}
-function brandLabel(p){return BRAND_LABEL[p.brand_slug]||p.brand_slug}
+function brandLabel(p){return brandNames.get(p.brand_slug)||BRAND_LABEL[p.brand_slug]||p.brand_slug}
 function needMatch(p,n){return (p.strengths||[]).includes(n)||(n==="ألعاب"&&/Elite|8400|A18/.test(p.chipset||""))||(n==="استعمال يومي")||(n==="بطارية"&&(p.battery_mah||0)>=5500)}
-function canDisplay(p){if(brand!=="all"&&p.brand_slug!==brand)return false;if(focus!=="all"&&!needMatch(p,focus))return false;const text=[p.name,p.chipset,brandLabel(p),p.tagline_ar].join(" ").toLowerCase();return text.includes(query)}
+function canDisplay(p){if(brand!=="all"&&p.brand_slug!==brand)return false;if(category!=="all"&&p.category_slug!==category)return false;if(focus!=="all"&&!needMatch(p,focus))return false;const text=[p.name,p.chipset,brandLabel(p),p.tagline_ar].join(" ").toLowerCase();return text.includes(query)}
 function card(p){const fav=favorites.includes(p.slug);return '<article class="product-card"><div class="product-image" data-tone="'+(p.brand_slug==="xiaomi"?"violet":p.brand_slug==="apple"?"gold":p.brand_slug==="poco"?"cyan":"")+'">'+photo(p)+'<span class="card-tag">'+esc((p.strengths||[])[0]||"موثق")+'</span><button type="button" class="card-fav '+(fav?"is-saved":"")+'" data-favorite="'+esc(p.slug)+'" aria-label="'+(fav?"إزالة من المفضلة":"أضف إلى المفضلة")+'">'+icon("heart")+'</button><span class="img-credit">صورة مرجعية</span></div><div class="product-body"><div class="product-overline">'+esc(brandLabel(p))+'</div><h3>'+esc(p.name)+'</h3><p class="product-description">'+esc(p.tagline_ar)+'</p><div class="micro-specs"><span>'+esc(p.display_inches||"—")+'" بوصة</span><span>'+esc(p.camera_main_mp||"—")+' MP</span><span>'+esc(p.battery_mah?fmt(p.battery_mah)+" mAh":"البطارية: مرجع الشركة")+'</span></div><div class="product-price"><div>'+priceMarkup(p)+'</div>'+icon("shield")+'</div><div class="card-actions"><button type="button" class="btn btn-outline btn-sm" data-detail="'+esc(p.slug)+'">اكتشف التفاصيل '+icon("arrow")+'</button><button class="add-compare" type="button" data-compare="'+esc(p.slug)+'" aria-label="أضف الهاتف إلى المقارنة">'+icon("compare")+'</button></div></div></article>'}
-function renderBrands(){const ids=["all",...BRANDS_SORT.filter(x=>phones.some(p=>p.brand_slug===x))];for(const p of phones){if(!ids.includes(p.brand_slug))ids.push(p.brand_slug)}$("brandRail").innerHTML=ids.map(id=>'<button type="button" class="brand-pill '+(brand===id?"active":"")+'" data-brand="'+id+'" aria-pressed="'+(brand===id)+'"><b>'+(id==="all"?"كل الماركات":esc(id.toUpperCase()))+'</b><small>'+(id==="all"?"استكشفها جميعاً":esc(BRAND_LABEL[id]||id))+'</small></button>').join("")}
+function renderBrands(){const ids=["all",...BRANDS_SORT.filter(x=>phones.some(p=>p.brand_slug===x))];for(const p of phones){if(!ids.includes(p.brand_slug))ids.push(p.brand_slug)}$("brandRail").innerHTML=ids.map(id=>'<button type="button" class="brand-pill '+(brand===id?"active":"")+'" data-brand="'+id+'" aria-pressed="'+(brand===id)+'"><b>'+(id==="all"?"كل الماركات":esc(id.toUpperCase()))+'</b><small>'+(id==="all"?"استكشفها جميعاً":esc(brandNames.get(id)||BRAND_LABEL[id]||id))+'</small></button>').join("")}
+function renderCategoryOptions(){
+ const picker=$("catalogCategorySelect");
+ if(!picker)return;
+ const options=catalogCategories.filter(x=>x.kind==="phones"&&x.is_published);
+ if(category!=="all"&&!options.some(x=>x.slug===category))category="all";
+ picker.innerHTML='<option value="all">كل التصنيفات</option>'+options.map(x=>'<option value="'+esc(x.slug)+'">'+esc(x.name_ar)+'</option>').join("");
+ picker.value=category;
+}
 function renderCatalog(){
  const base=phones.filter(canDisplay);
  const list=window.MontanaStage2?window.MontanaStage2.selectSort(base):base;
@@ -113,10 +121,12 @@ async function fetchRate(){try{const r=await fetch("./api/rates",{cache:"no-stor
 async function fetchCatalog(){
  try{
   const headers={apikey:PUBLISHABLE_KEY},timeout=AbortSignal.timeout?AbortSignal.timeout(13000):undefined;
-  const [phonesResp,variantResp,guideResp]=await Promise.all([
+  const [phonesResp,variantResp,guideResp,brandsResp,categoriesResp]=await Promise.all([
    fetch(API_BASE+"/phone_models?select=*&order=name.asc",{headers,signal:timeout,cache:"no-store"}),
    fetch(API_BASE+"/phone_variants?select=*&order=id.asc",{headers,signal:timeout,cache:"no-store"}),
-   fetch(API_BASE+"/phone_price_guides?select=model_slug,usd_estimate,basis,is_approved,revised_at",{headers,signal:timeout,cache:"no-store"})
+   fetch(API_BASE+"/phone_price_guides?select=model_slug,usd_estimate,basis,is_approved,revised_at",{headers,signal:timeout,cache:"no-store"}),
+   fetch(API_BASE+"/brands?select=slug,name,short_name,is_published&order=sort_order.asc",{headers,signal:timeout,cache:"no-store"}),
+   fetch(API_BASE+"/catalog_categories?select=slug,name_ar,kind,is_published,sort_order&order=sort_order.asc",{headers,signal:timeout,cache:"no-store"})
   ]);
   if(!phonesResp.ok)throw Error("Catalog HTTP "+phonesResp.status);
   const data=await phonesResp.json();if(!Array.isArray(data)||!data.length)throw Error("Empty catalog");
@@ -124,15 +134,17 @@ async function fetchCatalog(){
   variants=variantResp.ok?await variantResp.json():[];
   const g=guideResp.ok?await guideResp.json():[];
   priceGuides=new Map(Array.isArray(g)?g.map(x=>[x.model_slug,x]):[]);
+  if(brandsResp.ok){const b=await brandsResp.json();brandNames=new Map(Array.isArray(b)?b.map(x=>[x.slug,x.short_name||x.name]):[])}
+  if(categoriesResp.ok){const c=await categoriesResp.json();catalogCategories=Array.isArray(c)?c:[]}
   if(!guideResp.ok)console.warn("Guide prices not available",guideResp.status);
   $("catalogError").classList.add("hidden");
  }catch(err){
   phones=FALLBACK;
-  variants=[];priceGuides=new Map();
+  variants=[];priceGuides=new Map();catalogCategories=[];
   $("catalogError").classList.remove("hidden");
   $("catalogError").textContent="تعذّر تحديث الكتالوج السحابي؛ نعرض موديلات احتياطية دون أسعار غير متحقق منها.";
  }
- renderBrands();renderHero();renderCatalog();renderComparisonControls();
+ renderBrands();renderCategoryOptions();renderHero();renderCatalog();renderComparisonControls();
  if(activePage==="favorites")renderFavorites();
  if(window.MontanaStage2){window.MontanaStage2.refreshPhones();window.MontanaStage2.handleURL()}
 }
@@ -143,9 +155,9 @@ function renderAccessories(){
 function saveFav(slug){favorites=favorites.includes(slug)?favorites.filter(s=>s!==slug):[...favorites,slug];storeSet("montana.favs",favorites);toast(favorites.includes(slug)?"أُضيف إلى المفضلة":"أُزيل من المفضلة");renderCatalog();if(activePage==="favorites")renderFavorites()}
 function compareWith(slug){closeDetail();$("compareFirst").value=slug;const other=phones.find(p=>p.slug!==slug);if($("compareSecond").value===slug&&other)$("compareSecond").value=other.slug;navigate("compare")}
 function init(){favorites=storeGet("montana.favs",[]);unit=storeGet("fonkora.currency","new");if(!["usd","new","old"].includes(unit))unit="new";if($("currencySelect"))$("currencySelect").value=unit;if($("budgetCurrencyChoice"))$("budgetCurrencyChoice").value=unit==="usd"?"usd":unit==="old"?"syp_old":"syp_new";renderBrands();renderHero();renderCatalog();renderComparisonControls();renderNeeds();renderAccessories();budgetText();document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.nav)navigate(b.dataset.nav);else if(b.dataset.brand){brand=b.dataset.brand;renderBrands();renderCatalog()}else if(b.dataset.detail)openDetail(b.dataset.detail);else if(b.dataset.favorite)saveFav(b.dataset.favorite);else if(b.dataset.compare)compareWith(b.dataset.compare);else if(b.dataset.need){const n=b.dataset.need;selectedNeeds=selectedNeeds.includes(n)?selectedNeeds.filter(x=>x!==n):[...selectedNeeds.slice(-2),n];renderNeeds()}});
-$("focusSelect").addEventListener("change",e=>{focus=e.target.value;renderCatalog()});$("searchInput").addEventListener("input",e=>{query=e.target.value.trim().toLowerCase();renderCatalog()});
+$("catalogCategorySelect").addEventListener("change",e=>{category=e.target.value;renderCatalog()});$("focusSelect").addEventListener("change",e=>{focus=e.target.value;renderCatalog()});$("searchInput").addEventListener("input",e=>{query=e.target.value.trim().toLowerCase();renderCatalog()});
 $("compareFirst").addEventListener("change",renderComparison);$("compareSecond").addEventListener("change",renderComparison);$("budgetUsd").addEventListener("input",budgetText);$("runAdvisor").addEventListener("click",renderAdvisor);$("currencySelect").addEventListener("change",e=>{unit=e.target.value;storeSet("fonkora.currency",unit);if($("budgetCurrencyChoice"))$("budgetCurrencyChoice").value=unit==="usd"?"usd":unit==="old"?"syp_old":"syp_new";refreshRateUi()});$("advisorFab").addEventListener("click",()=>navigate("advisor"));$("closeDetail").addEventListener("click",closeDetail);$("detailOverlay").addEventListener("click",e=>{if(e.target===$("detailOverlay"))closeDetail()});document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDetail();if(e.key==="Tab"&&!$("detailOverlay").classList.contains("hidden")){const a=$("detailDialog").querySelectorAll('button:not([disabled]),a[href]');if(!a.length)return;const first=a[0],last=a[a.length-1];if(e.shiftKey&&document.activeElement===first){last.focus();e.preventDefault()}else if(!e.shiftKey&&document.activeElement===last){first.focus();e.preventDefault()}}});document.addEventListener("error",e=>{if(e.target.tagName==="IMG"){const img=e.target;img.style.visibility="hidden";const par=img.parentElement;if(par&&!par.querySelector(".image-fallback")){const span=document.createElement("div");span.className="image-fallback";span.textContent="📱";par.appendChild(span)}}},true);
 if("serviceWorker" in navigator&&(location.protocol==="https:"||location.hostname==="localhost"))navigator.serviceWorker.register("./sw.js").catch(()=>{});
-if(window.MontanaStage2)window.MontanaStage2.init({api:API_BASE,key:PUBLISHABLE_KEY,getPhones:()=>phones,getVariants:()=>variants,getGuideUsd:guideUsd,getRate:()=>rate,renderCatalog,clearBaseFilters:()=>{brand="all";focus="all";query="";$("searchInput").value="";$("focusSelect").value="all";renderBrands();renderCatalog()},renderComparison,openDetail,closeDetail,go:navigate,toast});
+if(window.MontanaStage2)window.MontanaStage2.init({api:API_BASE,key:PUBLISHABLE_KEY,getPhones:()=>phones,getVariants:()=>variants,getGuideUsd:guideUsd,getRate:()=>rate,renderCatalog,clearBaseFilters:()=>{brand="all";category="all";focus="all";query="";$("searchInput").value="";$("focusSelect").value="all";renderBrands();renderCategoryOptions();renderCatalog()},renderComparison,openDetail,closeDetail,go:navigate,toast});
 fetchCatalog();fetchRate()}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
