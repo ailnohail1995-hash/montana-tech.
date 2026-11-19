@@ -1,6 +1,6 @@
 /* Public storefront shell only. Never cache Supabase API, FX rates, or private customer data. */
-const CACHE="montana-shell-stage1-20261119-v1";
-const STATIC=["./","./index.html","./styles.css","./app.js","./manifest.webmanifest","./assets/icon.svg"];
+const CACHE="montana-shell-stage2-20261119-v1";
+const STATIC=["./","./index.html","./styles.css","./stage2.js","./app.js","./manifest.webmanifest","./assets/icon.svg"];
 self.addEventListener("install",e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(STATIC)).then(()=>self.skipWaiting())));
 self.addEventListener("activate",e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener("fetch",e=>{
