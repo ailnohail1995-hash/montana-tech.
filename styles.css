@@ -6,3 +6,92 @@
 @media(max-width:420px){.header-tools{gap:4px}.brand-type small{font-size:8px}.hero{min-height:430px}.hero-art{opacity:.62;left:-14%}.hero-text p{max-width:210px}.hero-text h1{font-size:32px}.hero-actions .btn{font-size:10px;padding:10px}.hero-stats{font-size:9px}.product-image{height:164px}.product-description{min-height:49px}.micro-specs span:nth-child(3){display:none}.product-price{display:block}.product-price small{margin-top:3px}.card-tag{font-size:9px}.product-body h3{font-size:13px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
 .decision-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:18px}.decision-card{padding:22px;border:1px solid #476a70;background:linear-gradient(145deg,#214048,#152d42);border-radius:17px}.decision-card h3{font-family:Manrope,Tahoma,sans-serif;font-size:16px}.decision-card p{color:#c2e8e5;font-size:12px}.decision-card .eyebrow{color:#8ff8d8}@media(max-width:560px){.decision-grid{grid-template-columns:1fr}}
+
+/* Stage 2: readable decision tools and compact, mobile-first advanced controls. */
+.filter-ops{display:flex;align-items:center;gap:13px;margin:-2px 0 15px;flex-wrap:wrap}
+.filter-trigger,.filter-reset,.compare-share{border:1px solid #43687e;background:#1a3345;color:#d7f6f7;border-radius:12px;padding:9px 14px;font-size:12px;font-weight:700}
+.filter-trigger{display:flex;align-items:center;gap:8px;color:var(--mint)}
+.filter-trigger[aria-expanded=true]{border-color:#79f7d6;background:#21494c}
+.filter-reset{color:#a6bcca;background:transparent;border-color:transparent}
+.filter-count{font-size:11px;color:#b2cbd4;margin-inline-start:auto}
+.advanced-panel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;background:linear-gradient(120deg,#192f41,#111f32);border:1px solid #386073;border-radius:20px;padding:20px;margin-bottom:18px}
+.advanced-panel label{font-size:12px;font-weight:600;color:#b8cfdb;display:grid;gap:7px}
+.advanced-panel select,.compare-tools select,.accessories-picker select,.budget-edit select,.budget-edit input{background:#0e2032;border:1px solid #3f6377;color:#e7f6fc;border-radius:11px;min-width:0;width:100%;padding:11px;font-size:12px}
+.advanced-panel select:focus-visible,.compare-tools select:focus-visible{outline:2px solid var(--mint)}
+.check-filter{display:flex!important;align-items:center;gap:9px!important;cursor:pointer;line-height:1.6}
+.check-filter input{width:17px;height:17px;accent-color:#89f7d7}
+.filter-note{grid-column:1/-1;font-size:11px;color:#91afbe;margin:2px 0}
+.compare-tools{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:-10px 0 18px;padding:13px 15px;border:1px solid #315267;background:#13263a;border-radius:16px}
+.compare-tools>label:first-child{font-size:12px;display:flex;align-items:center;gap:12px;flex:1;min-width:180px}
+.compare-tools select{width:auto;flex:1}
+.compare-share{background:#214449;color:#9af9e2}
+.stage2-insight{margin-top:22px;border:1px solid #487e80;background:linear-gradient(145deg,#1d4549,#112d3e);border-radius:19px;padding:21px}
+.stage2-insight h3{font-size:21px;color:#fff;margin:8px 0 14px}
+.stage2-insight>p{font-size:13px;color:#cae7e4;line-height:1.9;margin:12px 0 0}
+.insight-metric{border:1px solid #447377;background:#0d2d37;border-radius:14px;padding:16px;display:grid;gap:5px}
+.insight-metric>span{font-size:11px;color:#a5d5d2}
+.insight-metric strong{font-family:Manrope,Tahoma,sans-serif;color:#f4fffc;font-size:15px;overflow-wrap:anywhere}
+.insight-metric strong small{font-family:"IBM Plex Sans Arabic",Tahoma,sans-serif;font-size:11px;color:var(--mint);margin:0 5px}
+.insight-metric>small{font-size:10px;color:#8fc2c2}
+.budget-advanced{border-top:1px solid #365165;margin-top:24px;padding-top:16px}
+.budget-advanced>label{font-weight:700;font-size:12px}
+.budget-edit{display:grid;grid-template-columns:1fr 160px;gap:8px;margin-top:10px}
+.budget-advanced>small{display:block;color:#9ab5c8;font-size:10px;margin-top:7px}
+.need-button{position:relative}
+.need-rank{display:inline-grid;place-items:center;border-radius:20px;width:22px;height:22px;background:#a4ffdc;color:#0e3331;font-weight:900;font-size:11px;margin-inline-start:9px}
+.stage2-advisor-title{border-bottom:1px solid #365b69;margin-bottom:16px;padding-bottom:13px}
+.stage2-advisor-title h3{font-size:20px;margin:7px 0}
+.stage2-advisor-title p{font-size:12px;color:#a3c2d1;margin:0}
+.stage2-recommend{display:flex;gap:13px;align-items:flex-start;padding:17px;background:#172e42;border:1px solid #3b5c6c;border-radius:16px;margin-bottom:12px}
+.recommend-rank{flex:none;width:33px;height:33px;border-radius:11px;display:grid;place-items:center;background:#2a5553;color:#a9ffdf;font-family:Manrope;font-weight:900}
+.recommend-body{min-width:0;flex:1}
+.recommend-body h4{margin:1px 0 8px;font-family:Manrope,"IBM Plex Sans Arabic";font-size:15px}
+.recommend-body p{margin:6px 0;font-size:11px}
+.recommend-explain{color:#cff1e8}.recommend-limit{color:#a6c2d1}.recommend-price{color:#ebdda8}
+.recommend-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.recommend-actions button,.alt-item button,.detail-share-row button{padding:8px 12px;border:1px solid #538b83;background:#1b4349;color:#bbffe9;border-radius:10px;font-size:11px}
+.recommend-actions button:last-child,.alt-item button:last-child{color:#e8f7fb;border-color:#476981;background:#24425a}
+.detail-stage2{margin-top:22px;border-top:1px solid #36596e;padding-top:15px}
+.detail-tabbar{display:flex;gap:7px;overflow:auto;padding-bottom:10px}
+.detail-tabbar button{flex:1;white-space:nowrap;background:#1c324a;border:1px solid #436079;color:#d8eaf5;padding:11px 9px;border-radius:11px;font-size:11px;font-weight:700}
+.detail-tabbar button.active{background:#235b54;color:#b9ffe7;border-color:#74d6bc}
+.detail-stage2-panel{border:1px solid #32566d;border-radius:15px;background:#132a3e;padding:17px}
+.detail-stage2-panel h3{margin:0 0 12px;font-size:17px}
+.detail-stage2-panel p{font-size:12px;color:#b4cddd;line-height:1.8}
+.reason-tags{display:flex;gap:7px;flex-wrap:wrap}
+.reason-tags>span{display:flex;align-items:center;gap:5px;border:1px solid #518582;background:#1b4648;padding:7px 10px;font-size:11px;color:#b6ffe4;border-radius:20px}
+.reason-tags .icon{width:14px;height:14px}
+.alternatives-list{display:grid;gap:9px}
+.alt-item{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;padding:12px;background:#1d334a;border:1px solid #3b596e;border-radius:13px}
+.alt-item b{font-size:12px}
+.alt-item small{font-size:10px;color:#adc9d6}
+.alt-item div{display:flex;gap:7px}
+.detail-accessory-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.detail-accessory-grid>div{border:1px solid #37596b;border-radius:10px;background:#1e3649;padding:10px}
+.detail-accessory-grid b{display:block;font-size:12px}
+.detail-accessory-grid small{display:block;font-size:10px;color:#a9dcca;margin-top:5px}
+.detail-share-row{margin-top:17px;display:flex;justify-content:center}
+.detail-share-row .icon{width:15px;height:15px}
+.accessories-picker{background:#172d42;border:1px solid #365975;border-radius:19px;padding:18px;margin:0 0 20px;display:grid;gap:8px}
+.accessories-picker label{color:#c5e8e7;font-size:13px;font-weight:700}
+.accessories-picker select{max-width:450px}
+.accessories-picker p{margin:0;font-size:11px;color:#9dc1cd}
+.stage2-acc{min-height:200px}
+.stage2-acc strong{display:block;margin-top:14px;color:#9bf3d3;font-size:12px}
+.stage2-acc small{display:block;margin-top:5px;color:#a4bccc;font-size:10px}
+@media(max-width:760px){
+ .advanced-panel{grid-template-columns:repeat(2,minmax(0,1fr));padding:13px;gap:9px}
+ .advanced-panel label{font-size:11px}
+ .compare-tools>label:first-child{width:100%}
+ .compare-tools{gap:8px}
+ .stage2-insight{padding:14px}
+ .stage2-recommend{padding:12px}
+ .detail-tabbar button{min-width:96px}
+}
+@media(max-width:420px){
+ .advanced-panel{grid-template-columns:1fr}
+ .budget-edit{grid-template-columns:1fr 116px}
+ .detail-accessory-grid{grid-template-columns:1fr 1fr}
+ .filter-count{order:3;margin:0}
+ .alt-item{display:grid}
+}
