@@ -20,6 +20,11 @@ assert(js.includes('activateFirstManager'), 'Owner browser activation missing');
 assert(js.includes('/signup?redirect_to='), 'Signup must use native Supabase Auth with email verification');
 assert(!js.includes('AILNOHail1995'), 'Initial manager password must never be bundled');
 assert(js.includes('/recover?redirect_to='),'Gmail recovery must use Supabase Auth recovery email');
+for(const id of ['reauthPasswordForm','reauthNonce','reauthNewPassword','reauthPasswordRepeat','saveVerifiedPassword','changePassword'])assert(ids.has(id),'Manager reauthentication field missing: '+id);
+assert(js.includes('AUTH+"/reauthenticate"'),'Must ask Supabase to send reauth nonce');
+assert(js.includes('updatePasswordWithNonce'),'Must use nonce before accepting a password change');
+assert(js.includes('{password,nonce}'),'Password update must send nonce to Supabase Auth');
+
 assert(js.includes('type:"recovery"'),'Password reset must verify recovery token');
 assert(js.includes('getVerifiedAdminIdentity'),'Password update must verify admin email from Auth');
 assert(!js.includes('AILNOHail1995'),'User password must not appear in app bundle');
