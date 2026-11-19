@@ -28,6 +28,7 @@ window.MontanaStage2 = (() => {
   const currentRate=()=>Number(ctx?.getRate()?.market?.sell)||0;
   const profile=slug=>profiles.find(p=>p.model_slug===slug);
   const val=(id)=>byId(id)?.value;
+  function hasConfirmedPrice(model){return getVariants().some(v=>v.model_slug===model.slug&&v.is_published&&v.is_available&&(Number(v.price_usd)>0||Number(v.price_syp_new_fixed)>0))}
   function confirmedUsd(model){
     const v=getVariants().find(v=>v.model_slug===model.slug&&v.is_published&&v.is_available&&(Number(v.price_usd)>0||Number(v.price_syp_new_fixed)>0));
     if(!v)return null;
@@ -40,7 +41,7 @@ window.MontanaStage2 = (() => {
       if(selection.screen&&(!Number(p.display_inches)||Number(p.display_inches)<selection.screen))return false;
       if(selection.hz&&(!Number(p.screen_hz)||Number(p.screen_hz)<selection.hz))return false;
       if(selection.chip!=="all"&&!String(p.chipset||"").toLowerCase().includes(selection.chip))return false;
-      if(selection.priced&&confirmedUsd(p)===null)return false;
+      if(selection.priced&&!hasConfirmedPrice(p))return false;
       return true;
     });
     const order=(a,b)=>a.name.localeCompare(b.name,"en");
@@ -58,7 +59,7 @@ window.MontanaStage2 = (() => {
     selection.battery=0;selection.screen=0;selection.hz=0;selection.chip="all";selection.sort="name";selection.priced=false;
     for(const [id,value] of Object.entries({filterBattery:"0",filterScreen:"0",filterHz:"0",filterChip:"all",filterSort:"name"}))if(byId(id))byId(id).value=value;
     if(byId("filterPriced"))byId("filterPriced").checked=false;
-    updateFilterCount();ctx?.renderCatalog();
+    updateFilterCount();ctx?.clearBaseFilters();
   }
   function priorityInsight(a,b,focus){
     const pair=(title,x,y,suffix,moreIsNotBest=true)=>'<div class="insight-metric"><span>'+e(title)+'</span><strong>'+e(x==null?"غير معلن":fmt(x)+(suffix||""))+' <small>مقابل</small> '+e(y==null?"غير معلن":fmt(y)+(suffix||""))+'</strong>'+(moreIsNotBest?'<small>الأعلى رقمياً لا يعني الأفضل عملياً دون اختبار.</small>':'')+'</div>';
