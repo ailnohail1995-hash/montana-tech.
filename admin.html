@@ -26,6 +26,16 @@
    <div class="password-wrap"><input id="loginPassword" type="password" autocomplete="current-password" placeholder="أدخل كلمة مرور المدير" required minlength="8"><button type="button" id="showLoginPassword" class="password-visibility" aria-label="إظهار كلمة المرور">إظهار</button></div>
    <button id="loginSubmit" class="btn primary" type="submit">تسجيل دخول المدير <span aria-hidden="true">←</span></button>
   </form>
+  <div class="first-activation">
+   <button id="signupAdmin" class="btn outline" type="button">تفعيل حساب المدير لأول مرة</button>
+   <p class="muted">اكتب كلمة المرور في الحقل أعلاه ثم اضغط التفعيل. سيُرسل Supabase رسالة لتأكيد امتلاكك بريد المدير، ولا يُمنح أي حساب غير مؤكد صلاحية الإدارة.</p>
+   <form id="signupConfirmForm" class="hidden">
+     <label for="signupConfirmationCode">رمز تأكيد Gmail، إذا وصل في الرسالة بدلاً من الرابط</label>
+     <input id="signupConfirmationCode" inputmode="numeric" autocomplete="one-time-code" type="text" maxlength="12" placeholder="الرمز من رسالة التفعيل">
+     <button id="verifySignup" class="btn outline" type="submit">تأكيد الحساب بالرمز</button>
+   </form>
+   <p id="signupStatus" role="status" class="muted"></p>
+  </div>
   <button id="forgotPassword" type="button" class="quiet-reset">نسيت كلمة المرور؟ اطلب رسالة تحقق عبر Gmail</button>
   <form id="recoveryForm" class="hidden" autocomplete="off">
    <h2>تأكيد تغيير كلمة المرور</h2>
