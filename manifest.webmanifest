@@ -1,0 +1,21 @@
+{
+  "name": "مونتانا تك — متجر الهواتف الذكية",
+  "short_name": "مونتانا تك",
+  "description": "تجربة استكشاف الهواتف والمقارنة والترشيح دون عمليات شراء فعلية",
+  "id": "/",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#090e1a",
+  "theme_color": "#090e1a",
+  "dir": "rtl",
+  "lang": "ar",
+  "icons": [
+    {
+      "src": "./assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
