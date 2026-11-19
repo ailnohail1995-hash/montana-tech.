@@ -4,6 +4,12 @@ on:
     branches: [main]
     paths:
       - 'index.html'
+      - 'admin.html'
+      - 'admin.js'
+      - 'admin.css'
+      - 'admin.html'
+      - 'admin.js'
+      - 'admin.css'
       - 'app.js'
       - 'stage2.js'
       - 'styles.css'
@@ -31,6 +37,6 @@ jobs:
         with:
           node-version: '22'
       - name: Syntax check
-        run: node --check app.js && node --check stage2.js && node --check sw.js
+        run: node --check app.js && node --check stage2.js && node --check admin.js && node --check sw.js
       - name: Static contract tests
-        run: node tests/stage1.mjs && node tests/stage2.mjs && node tests/currency-prices.mjs
+        run: node tests/stage1.mjs && node tests/stage2.mjs && node tests/currency-prices.mjs && node tests/admin.mjs
