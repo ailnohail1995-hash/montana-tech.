@@ -95,3 +95,18 @@
  .filter-count{order:3;margin:0}
  .alt-item{display:grid}
 }
+
+
+/* Product photo assets are real extracted manufacturer/retailer imagery. No boxed white backgrounds. */
+.product-image{isolation:isolate;background:radial-gradient(circle at 49% 45%,rgba(119,205,225,.19),rgba(54,80,122,.09) 48%,rgba(9,21,36,.1) 80%)!important}
+.product-image[data-tone="gold"]{background:radial-gradient(circle at 49% 45%,rgba(230,185,132,.2),rgba(46,40,52,.09) 58%,rgba(8,18,36,.2) 90%)!important}
+.product-image[data-tone="violet"]{background:radial-gradient(circle at 49% 45%,rgba(171,136,220,.17),rgba(49,38,76,.1) 58%,rgba(8,18,36,.2) 90%)!important}
+.product-image[data-tone="cyan"]{background:radial-gradient(circle at 49% 45%,rgba(69,231,213,.15),rgba(24,74,69,.07) 58%,rgba(8,18,36,.2) 90%)!important}
+.product-image img{background:transparent!important;border-radius:0!important;object-fit:contain;width:92%;height:92%;filter:drop-shadow(0 12px 17px rgba(0,0,0,.33));will-change:transform}
+.product-card:hover .product-image img{transform:translateY(-5px) scale(1.045)}
+.hero-phone{background:transparent!important;box-shadow:none!important;border-radius:0!important;overflow:visible!important}
+.hero-phone img{background:transparent!important;object-fit:contain!important}
+.comp-name img,.detail-image img,.recommend-item img,.detail-hero img{background:transparent!important;border-radius:0!important;object-fit:contain!important;filter:drop-shadow(0 9px 12px rgba(0,0,0,.3))}
+.comp-name img{max-width:88%;max-height:165px}
+.detail-image{background:radial-gradient(circle at 50% 45%,rgba(112,175,202,.21),transparent 72%)!important}
+.img-credit{background:rgba(20,41,58,.62);color:#b5d8d6;font-size:9px}
