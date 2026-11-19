@@ -1,4 +1,4 @@
-name: Web Stage 1 quality checks
+name: Web storefront quality checks
 on:
   push:
     branches: [main]
@@ -15,6 +15,7 @@ on:
     paths:
       - 'index.html'
       - 'app.js'
+      - 'stage2.js'
       - 'styles.css'
       - 'sw.js'
       - 'manifest.webmanifest'
