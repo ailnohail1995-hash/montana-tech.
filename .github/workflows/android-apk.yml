@@ -1,4 +1,4 @@
-name: Android APK — demo
+name: Fonkora Android APK — demo
 on:
   workflow_dispatch:
   push:
@@ -32,7 +32,7 @@ jobs:
         run: gradle :android:assembleDebug --no-daemon --stacktrace
       - uses: actions/upload-artifact@v4
         with:
-          name: montana-tech-demo-debug-apk
+          name: fonkora-demo-debug-apk
           path: android/build/outputs/apk/debug/android-debug.apk
           if-no-files-found: error
           retention-days: 7
