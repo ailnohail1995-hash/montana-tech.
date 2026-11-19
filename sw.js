@@ -1,6 +1,6 @@
 /* FONKORA public PWA: cache only app shell upfront, product photos on demand.
  * Never cache live FX, Supabase API or private customer data. */
-const CACHE="fonkora-three-currencies-20261120-v1";
+const CACHE="fonkora-three-currencies-20261120-v2";
 const STATIC=["./","./index.html","./styles.css","./stage2.js","./app.js","./manifest.webmanifest","./assets/icon.svg"];
 self.addEventListener("install",event=>event.waitUntil(
  caches.open(CACHE).then(cache=>cache.addAll(STATIC)).then(()=>self.skipWaiting())
