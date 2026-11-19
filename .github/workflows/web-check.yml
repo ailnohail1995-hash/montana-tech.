@@ -1,0 +1,34 @@
+name: Web Stage 1 quality checks
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'app.js'
+      - 'styles.css'
+      - 'sw.js'
+      - 'manifest.webmanifest'
+      - 'tests/**'
+      - '.github/workflows/web-check.yml'
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'app.js'
+      - 'styles.css'
+      - 'sw.js'
+      - 'manifest.webmanifest'
+      - 'tests/**'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax check
+        run: node --check app.js && node --check sw.js
+      - name: Static contract tests
+        run: node tests/stage1.mjs
