@@ -14,8 +14,8 @@ import android.webkit.SslErrorHandler;
 import android.net.http.SslError;
 
 public final class MainActivity extends Activity {
-    private static final String HOME = "https://montana-tech-demo.montanatech21.workers.dev/";
-    private static final String ALLOWED_HOST = "montana-tech-demo.montanatech21.workers.dev";
+    private static final String HOME = "https://fonkora-store.montanatech21.workers.dev/";
+    private static final String ALLOWED_HOST = "fonkora-store.montanatech21.workers.dev";
     private WebView webView;
 
     @Override public void onCreate(Bundle state) {
